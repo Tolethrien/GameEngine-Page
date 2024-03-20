@@ -1,0 +1,55 @@
+---
+title: Fragment
+description: Fragment Info
+---
+
+import { Tabs, TabItem } from "@astrojs/starlight/components";
+
+Fragment jest głównym blokiem i budulcem całego silnika. Wszystkie obiekty w
+grze powinny extendować Fragment. Jest on zbudowany w modularny sposób
+pozwalający łatwo przypisywać do niego poszczególne [Pluginy](https://diataxis.fr/how-to-guides/).
+
+Fragment nigdy nie powiniene być używany bezposśrednio a jedynie jako extend
+dla Klasy.
+
+## Tworzenie nowego Fragmentu
+
+Aby stworzyć nowy Fragment extendujemy jego klase w następujący sposób:
+
+<Tabs>
+  <TabItem label="pipeline.ts">
+    ```ts
+struct ax{
+    pass:true
+}
+@vortex;
+fn vertex(x:f32):vc4f{}
+var fun = function lang(l: number): string {
+  dateformat.i18n = require("./lang/" + l);
+  const a = new Batat();
+  return true;
+};
+```
+  </TabItem>
+  <TabItem label="shader.wgsl">
+    ```ts
+struct ax{
+    pass:true
+}
+@vortex;
+fn vertex(x:f32):vc4f{}
+var fun = function lang(l: number): string {
+  dateformat.i18n = require("./lang/" + l);
+  const a = new Batat();
+  return true;
+};
+```
+  </TabItem>
+</Tabs>
+
+Pozwala nam to tworzyć wiele instancji tego samego obiektu poprzez
+wywołanie go w <span style="color:red">**następujący**</span> sposób:
+
+## Further reading
+
+- Read [about how-to guides](https://diataxis.fr/how-to-guides/) in the Diátaxis framework

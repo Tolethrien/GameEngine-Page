@@ -1,17 +1,19 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
-import tailwindcssNesting from "tailwindcss/nesting";
 // https://astro.build/config
 export default defineConfig({
   integrations: [
+    tailwind({ applyBaseStyles: false, nesting: true }),
     starlight({
-      logo: { src: "./src/assets/houston.webp", replacesTitle: true },
       title: "EngineDocs",
-      social: {
-        github: "https://github.com/withastro/starlight",
-      },
+      social: {},
       sidebar: [
+        {
+          label: "Intro",
+          collapsed: true,
+          autogenerate: { directory: "intro" },
+        },
         {
           label: "Guides",
           items: [
@@ -22,18 +24,11 @@ export default defineConfig({
         },
         {
           label: "Reference",
+          collapsed: true,
           autogenerate: { directory: "reference" },
         },
       ],
-      customCss: ["./src/tailwind.css"],
+      customCss: ["./src/styles/tailwind.css"],
     }),
-    tailwind({ applyBaseStyles: false }),
   ],
-  vite: {
-    css: {
-      postcss: {
-        plugins: [tailwindcssNesting()],
-      },
-    },
-  },
 });

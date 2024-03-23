@@ -1,0 +1,248 @@
+---
+title: First Frame
+sidebar:
+  order: 3
+---
+
+import {
+  FileTree,
+  Aside,
+  Code,
+  Card,
+  CardGrid,
+  Steps,
+  Tabs,
+  TabItem,
+} from "@astrojs/starlight/components";
+import { Image } from "astro:assets";
+import img from "../../../assets/first-final.png";
+
+## Meat!
+
+Uff, czas na mięsko!
+
+Na początku warto zaznaczyć iż poradnik ten (mimo iż silnik jest zbudowany na tyle modułowo że każdy z elementów jego można zastąpić) bedzie używał wbudowanych w `Mise` komponentów jak
+[DOGMA]() (entity component system) czy [Aurora]()(renderer). Modyfikowanie silnika własnymi komponentami zostanie omówione w innym, bardziej zaawansowanym Poradniku.
+
+## Where am i?!
+
+Główym plikiem w którym startuje silnik a zarazem w którym definiujemy cały projekt jest `index.ts` zlokalizowany w `src/sandbox/`
+
+<FileTree>
+- src/
+  - sandbox/
+    - index.ts
+
+</FileTree>
+
+<br />
+
+wygląda on mniej więcej tak:
+
+<br />
+
+```ts title=index.ts
+async function preload() {
+  //
+}
+function setup() {
+  DogmaCore.createWorld("main");
+}
+Engine.Initialize({ preload, setup });
+```
+
+### Preload
+
+Preload jest funkcją przekazywaną do silnika i jej głównym założeniem jest wykonać wszystko co musi być wykonane zanim zostanie wygenerowana pierwsza klatka.
+Głównię służy do wczytywania assetów,tworzenia tekstur, configurowania ustawień silnika itp.
+
+<Aside title="async">
+  Funckja Preload wykonywana bedzie asynchronicznie na początku konfiguracji
+  silnika, niemniej silnik z ruszeniem dalej będzie czekał aż prealod się
+  zakończy więc jest to świetne miejsce na umieszczenie wszystkich rzeczy które
+  wymagają "czekania"
+</Aside>
+
+### Setup
+
+setup jest główną funkcją silnika, tutaj tworzony bedzie cały projekt. W tej funkcji konfiguruje się światy, dodaje obiekty, przypisuje systemy
+i tworzy "logikę" gry. Obecnie znajduje się w niej komenda `DogmaCre.createWorld("main")` która odpowiedzialna jest za stworzenie pierwszego świata
+który można zacząć zapełniać! DogmaCore jest systemem ECS o którym więcej można poczytać [tutaj](https://pl.wikipedia.org/wiki/Entity-component-system).
+
+Na razie jedyne co musimy rozumieć to to że stworzyliśmy "swiat gry" który będziemy mogli zacząć zapełniać różnymi elementami czy mechanikami.
+
+### Init
+
+`Engine.Initialize()` Inicjuję silni z funkcją preload oraz setup, konfiguruje wszystko co powienien a nastepnie rozpoczyna `gameLoop` czyli zapętloną funkcję która odpowiada za dzałanie gry.
+
+## First World
+
+Skupimy się teraz na dodaniu kilku elementów do silnika by móc zobaczyć coś na ekranie!
+
+### Batcher
+
+Pierwszy elementem potrzebnym nam by móc cokolwiek w ogóle zobaczyć jest `Renderer` czyli system
+komunikowania się z kartą graficzną by móc "kolorować pixele". W przypadku `Misy` nie musimy się o to martwić gdyż ma ona wbudowany
+customowy renderer [Aurora]() stworzony na potrzeby silnika. [Aurora]() ma też wbudowany w siebię tak zwany ["Batcher"](/reference/aurora/urp/) czyli
+gotowy i łatwy w użyciu zestaw pipelinów do renderowania sceny.
+
+#### Dodajmy Batcher!
+
+w naszym preload dodajmy następujący kod:
+
+<Code
+  code={`async function preload() {
+  await AuroraBatcher.createBatcher({
+    backgroundColor: [255, 255, 0, 255],
+  });
+}`}
+  lang="ts"
+  title={"index.ts"}
+  ins={[2, 3, 4]}
+/>
+
+Jeśteśmy już całkiem blisko ale jednak jeszcze daleko, By wyswietlić cokolwiek na ekranie będziemy potrzebować mieć coś do wyświetlenia, duuh!
+
+### Draw
+
+Czas coś wyświetlić na ekranie. Narysujemy całkiem ambitnie... kwadrat!
+
+#### Entity
+
+Jeśli jeszcze nie jesteście zaznajamieni jak działa Entity-Component-System to teraz bedzie to dobry moment by choć trochę o nim poczytać.
+
+TLDR dla niecierpliwych natomiast jest taki że architektura ta tworzy obiekty zwane `Entity` do których można przypisywać `Components` a następnie `System` zarządza odpowiednimi komponentami i je modyfikuje.
+
+<CardGrid>
+  <Card title="Przykład A" icon="seti:plan">
+    - `kwiat` to Entity.
+    - Kwiat ma swoje komponenty: `liście`, `płatki`.
+    - `Wiatr` to system
+
+`Wiatr` "bierzę" komponent `liście` z wszystkich `kwiat` i nimi rusza by
+powiewały na wietrze.
+
+  </Card>
+  <Card title="Przykład B" icon="seti:plan">
+    - `Człowiek` to Entity,
+    - `człowiek` ma swój komponent `stan` w jakim się znajduję.
+    - `pora dnia` to system,
+
+kiedy wybiję 22:00 `pora dnia` zmieni `stan` w `człowiek` na "śpiący".
+
+  </Card>
+</CardGrid>
+
+W folderze `sandbox` znajduje się subfolder o nazwie `Entities`, w nim znajduje się pierwszy przykładowy Entity
+
+<FileTree>
+- src/
+  - sandbox/
+    - index.ts
+    - entities/
+      - **rectangle.ts**
+
+</FileTree>
+
+By dodać Entity do świata należy wykorzystać `EntityManger` który zarządza wszystkimi obiektami we wszystkich światach.
+Dodajmy teraz `Rectangle` do świata.
+
+<Code
+  code={`function setup() {
+  DogmaCore.createWorld("main");
+  EntityManager.addEntityOnStart(new Rectangle());
+}`}
+  lang="ts"
+  title={"index.ts"}
+  ins={3}
+/>
+
+<br />
+<br />
+<Aside type="tip">
+  `EntityManger` jest tym co będzie zawsze używane do dodawania, usuwania lub
+  przenoszenia Entity. Nie należy tego robić w żaden inny sposób.
+</Aside>
+<br />
+<br />
+
+Wspaniale! Nasz Entity teraz stworzył swoje komponenty(w tym przypadku jedynie komponent `SpriteRenderer`), umieścił je w odpowiednim miejscu i tylko czeka by się wyświetlić!
+
+Zapewne zauważyliścię że po dodaniu `Rectangle` nic w sumie się nie zmieniło w oknie. To dlatego że nie mamy jeszcze możliwości rysowania niczego na ekranie!
+Narazie jedynie mamy komponent zawierający INFORMACJE jak ma wyglądać `Rectangle` narysowany na ekranie. Teraz musimy faktycznie go narysować!
+
+#### System
+
+Dobrze! teraz już ostatnia prosta. Musimy dodać System który pozwoli nam wyświetlić owy kwadrat! Ten system nazywa się całkiem niespodziwanie `Renderer`
+i jest dodany do pakietu początkowych komponentów i systemów by można było go używać odrazu bez pisania samemu od zera.
+
+Znajduję się on w folderze `Systems` w `sandbox` jeśli chcielibyście zobaczyć jak działa pod maską. Teraz skupimy się tylko na dodaniu go, objaśnienia przyjdą później.
+
+<FileTree>
+- src/
+  - sandbox/
+    - index.ts
+    - entities/
+      - rectangle.ts
+    - systems/
+      - **renderer.ts**
+
+</FileTree>
+
+Dodajmy go zatem do świata!
+
+<Code
+  code={`function setup() {
+  DogmaCore.createWorld("main");
+  EntityManager.addEntityOnStart(new Rectangle());
+  DogmaCore.addSystem("Renderer");
+}`}
+  lang="ts"
+  title={"index.ts"}
+  ins={4}
+/>
+
+Wybornie! Jeśli wszystko poszło dobrzę to naszym ocza w oknie ukazał się piękny czarny kwadrat na żółtym tle a my możemy być z siebie dumni i poklepać się po ramieniu bo zakończyliśmy pierwszą część poradnika :)
+
+Efekt możemy zoabaczyć tutaj!
+
+<Tabs>
+  <TabItem label="Final Code" icon="open-book">
+    <Code
+      code={`
+async function preload() {
+    await AuroraBatcher.createBatcher({
+    backgroundColor: [255, 255, 0, 255],
+  });
+}
+function setup() {
+  DogmaCore.createWorld("main");
+  EntityManager.addEntityOnStart(new Rectangle());
+  DogmaCore.addSystem("Renderer");
+}
+Engine.Initialize({ preload, setup });
+`}
+      lang="ts"
+      title={"index.ts"}
+    />
+  </TabItem>
+  <TabItem label="Effect" icon="puzzle">
+    <Image src={img} alt="black rectangle." width="150" height="150" />
+  </TabItem>
+</Tabs>
+
+## Summary
+
+<Steps>
+
+1. Znaleźliśmy główny plik i zainicjowaliśmy silnik z funkcja `Preload` oraz `Setup`
+
+2. Dodaliśmy Batcher Aurory by mieć dostęp do grafiki i możliwości rysowania.
+
+3. Dodaliśmy do świata Entity `Rectangle` zawierający komponent `SpriteRenderer` z informacjami o tym jak ma wyglądać nasz kwadrat
+
+4. Dodaliśmy System `Renderer` pozwalający nam wyrysować na ekran kwadrat z informacji jakie posiadał w komponencie `SpriteRenderer`
+
+5. Poklepaliśmy się po plecak jaki piekny kwadrat stworzyliśmy! :)
+
+</Steps>

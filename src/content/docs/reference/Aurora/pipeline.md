@@ -15,9 +15,11 @@ sidebar:
 
 ## BindGroup
 
+<br />
+
 ### AddBindGroup
 
-- opis
+- addBindGroup tworzy nową bindGroupe
 
 ```ts title="AuroraPipeline.ts"
 export default class AuroraPipeline {
@@ -57,6 +59,8 @@ export default class AuroraPipeline {
 <hr />
 
 ## BufferLayout
+
+<br />
 
 ### CreateVertexBufferLayout
 
@@ -118,6 +122,8 @@ export default class AuroraPipeline {
 <hr />
 
 ## Pipeline
+
+<br />
 
 ### CreatePipelineLayout
 
@@ -219,5 +225,7 @@ export default class AuroraPipeline {
 <hr />
 
 ## ColorAttachments
+
+<br />
 
 IN PROGESS...

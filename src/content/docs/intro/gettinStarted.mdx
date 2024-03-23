@@ -1,0 +1,62 @@
+---
+title: Getting Started
+sidebar:
+  order: 2
+---
+
+import { FileTree } from "@astrojs/starlight/components";
+
+## Whoa?!
+
+wow... nie spodziewałem sie nikogo tutaj! a już na pewnie nie by ktoś faktycznie chciał to przetestować!
+No ale skoro już tu jesteś to chętnie przeprwoadze cię przez tą drogę.
+
+## Knowhow
+
+Na potrzeby tych tutoriali zakładam że znasz przynajmniej podstawy tych technologi:
+
+- [Typescript](https://www.typescriptlang.org)
+- [Node.js](https://nodejs.org/en)
+- [Electron.js](https://www.electronjs.org) (ogólna znajomość czym jest i co robi)
+- [WebGPU/WGSL](https://www.w3.org/TR/webgpu/) (zrozumienie czym są shadery, jak działa karta graficzna, jak sie buduje pipeliny itp.)
+- github/npm (umiejętność klonowania repozytoriów i uruchamiania ich lokalnie)
+
+## Source Code
+
+Misa jest projektem hobbystycznym i cały czas w stanie budowy, wiec nie posiada jeszcze swojej instancji na żadnym managerze pakietów.
+Oznacza to że by zacząć z nim pracować musisz go sklonować bezpośrednio z githuba.
+
+Repozytorium możesz pobrać z tego [linku](https://github.com/Tolethrien/GameEngine-core/tree/dev)
+
+Po pobraniu i zainstalowaniu niezbednych pakietów twój file Tree powinien wyglądać mniej więcej tak:
+
+<br />
+
+<FileTree>
+- node-modules/
+- configs/
+- src/
+  - assets/
+  - backend/
+  - core/
+  - css/
+  - preload/
+  - sandbox/
+  - types/
+- index.html
+- package.json
+- package-lock.json
+- tsconfig.json
+- forge-config.ts
+
+</FileTree>
+
+<br />
+<br />
+
+po wpisaniu `npm run dev` powinno otworzyć się nowe okno aplikacji z pięknym czarnym
+ekranem!
+
+<br />
+
+Jeśli tak to gratuluję! Jesteśmy gotowi zaczynać! Przejdźmy teraz do pierwszego tutoriala jak coś zbudować! :)

@@ -6,3 +6,14 @@
 Add additional Tailwind styles to this file, for example with @layer:
 https://tailwindcss.com/docs/adding-custom-styles#using-css-and-layer
 */
+:root[data-theme="light"] {
+  --sl-color-black: #fcefff;
+  --sl-color-white: #5c2e2e;
+  --sl-color-bg-nav: #ebdced;
+  --sl-color-text: #5c2e2e;
+  --sl-color-gray-2: #5c2e2e;
+}
+:root[data-theme="dark"] {
+  --sl-color-white: #e8dfdf;
+  --sl-color-text: #e8dfdf;
+}

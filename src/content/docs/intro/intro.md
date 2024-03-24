@@ -6,7 +6,7 @@ sidebar:
 
 ## GameEngine
 
-Project Amano(nazwa robocza)
+Project Misa(nazwa robocza)
 
 - in honor to: hiroshi Amano
 

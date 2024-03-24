@@ -8,6 +8,11 @@ export default defineConfig({
     starlight({
       title: "EngineDocs",
       social: {},
+      disable404Route: true,
+      expressiveCode: {
+        useStarlightUiThemeColors: true,
+        themes: ["min-dark", "vitesse-light"],
+      },
       sidebar: [
         {
           label: "Intro",

@@ -4,13 +4,16 @@ sidebar:
   order: 2
 ---
 
-import { FileTree } from "@astrojs/starlight/components";
+import { FileTree, Aside, Tabs, TabItem } from "@astrojs/starlight/components";
+import img from "../../../assets/electronWindow.jpg";
+import { Image } from "astro:assets";
 
-## Whoa?!
-
-wow... nie spodziewałem sie nikogo tutaj! a już na pewnie nie by ktoś faktycznie chciał to przetestować!
-No ale skoro już tu jesteś to chętnie przeprwoadze cię przez tą drogę.
-
+<Aside type="note">
+  Zarówno Misa jak i ta dokumentacja jest we wczesnej fazie produkcji. Wiele
+  rzeczy zarówno w silniku jak i dokumentacji może uledz i ulegnie zmianie, a
+  obecna wersja obu tych rzeczy jest raczej "draftem" i nie powinna byc za taki
+  brana.
+</Aside>
 ## Knowhow
 
 Na potrzeby tych tutoriali zakładam że znasz przynajmniej podstawy tych technologi:
@@ -57,6 +60,32 @@ Po pobraniu i zainstalowaniu niezbednych pakietów twój file Tree powinien wygl
 po wpisaniu `npm run dev` powinno otworzyć się nowe okno aplikacji z pięknym czarnym
 ekranem!
 
+<Tabs>
+  <TabItem label="Terminal">
+
+```sh title="Starting App…"
+npm run dev
+```
+
+  </TabItem>
+  <TabItem label="Effect">
+   <Image src={img} alt="App window." width="500" height="500" />
+  </TabItem>
+</Tabs>
+
 <br />
 
-Jeśli tak to gratuluję! Jesteśmy gotowi zaczynać! Przejdźmy teraz do pierwszego tutoriala jak coś zbudować! :)
+Jeśli tak to gratuluję! **Jesteśmy gotowi zaczynać! :)**
+
+<br />
+<br />
+
+<Aside type="tip" title="Struktura Docs">
+
+Nim przejdziemy dalej warto zrozumieć strukturę tej dekumentacji.
+
+- Guides: Tutaj znajdują się pełne informację na temat wszystkich komponentów Misy, jak i potrzebne tutoriale i porady. NIe ma tu natomiast pełnej dokumentacji każdej funkcji czy klasy.
+
+- Reference: Tutaj znajduja się jedynie referencje do kodu. Jakich zmiennych używa dana klasa/funkcja i co one znaczą. Nie jest to miejsce polecane do nauki gdyż nie ma tam żadnych informacji jak używać tych rzeczy. Reference powinien być bardziej sybką przypominajką kiedy zaznajemieni jesteśmy już z silnikiem na tyle że umiemy na nim pracować.
+
+</Aside>

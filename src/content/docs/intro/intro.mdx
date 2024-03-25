@@ -1,0 +1,127 @@
+---
+title: "Introduction"
+sidebar:
+  order: 1
+---
+
+import {
+  FileTree,
+  Aside,
+  Code,
+  Card,
+  CardGrid,
+  Steps,
+  Tabs,
+  TabItem,
+} from "@astrojs/starlight/components";
+import Progress from "../../../components/progress.astro";
+
+## GameEngine
+
+### Project Misa <span style="font-size:10px">(nazwa robocza)</span>
+
+Misa jest silnikiem gier celującym w grafikę 2D, jego głównym założeniem jest krótki czas i prostota tworzenia własnych projektów. Przeznaczony on jest główne do robienia prostych gier 2D ktore może zbudować każdy nawet bez specjalistycznej wiedzy na temat Game Devu, jego celem jest pokazać że nawet z podstawową wiedzą można zbudować interaktywne ciekawe aplikację. Napisany jest on w języku TypeScript by zmniejszyć przepaść między WebDevem a GameDevem. Jego trzon opiera się o technologię Electron ktora pozwala wyeksportować gotowy projekt jako natywną aplikację na systemy PC a co za tym idzie podzielić się swoim projektem ze światem czy to poprzez [itch.io](http://itch.io) czy wstwiając go na steama. Docelowo silnik ma też pozwalać tworzyć gry działąjące bezpośrednio w przeglądarce.
+
+## Modules
+
+Silnik składa się w założeniu z kilku modułów które docelowo zostaną połączone w jedną aplikację.
+
+<FileTree>
+- Misa/
+  - Editor/
+  - Core/
+  - Aurora/
+  - Dogma/
+  - MapMaker/
+  - FontParser/
+  - NaviGPU/
+
+</FileTree>
+
+### Edytor
+
+Główny graficzny interface do tworzenia własnych projektów,aplikacja typu standalone w której odbywać się będzie cała praca nad grą wzorowany edytorami wszystkich najlepszych silników na rynku.
+
+Poniższe moduły bedą integralną częścią edytora.
+
+Kluczowymi jego elementami są:
+
+- Tworzenie nowych projektów.
+- Łatwe w obsłudze dodawanie elementów do gry.
+- Tworzenie świata gry.
+- Eksportowanie projektów do gotowych plików gry.
+- Integracja potencjalnych pluginów z silnikiem.
+
+### Core
+
+Główna część silnika odpowiedzialna za działanie projektów.
+
+Odpowiedzialny jest za wszystko co będzie się działo w projekcie. Gameloop, input System, Timers, Signals to tylko niektóre elementy którymi zajmuje się trzon silnika.
+
+### Aurora
+
+Renderer graficzny oparty na [webGPU](https://developer.mozilla.org/en-US/docs/Web/API/WebGPU_API),
+
+- Zapewnie dużą wydajnośc i pozwala na tworzenie własnych “pipelinów” graficznych wraz z shaderami.
+- Zapewnie Batcher czyli gotowy “Universal Render Pipeline” jesli po prostu chcemy zacząć prace i nie potrzebujemy żadnych specyficznych możliwości graficznych.
+
+WebGPU jest przyszłościowym API mającym zastąpić juz długoletnie webGL w przeglądarkach internetowych. Mimo iż jest on w fazie eksperymentalnej, zastosowanie go w oparciu o Electron(chromium) gwarantuje dostęp do tej technologii.
+
+### DOGMA
+
+DOGMA czyli "data oriented game mechanics architecture"
+
+Jest to własna wariacja systemu [ECS](https://pl.wikipedia.org/wiki/Entity-component-system) zastosowany dla trzoniu silnika.
+
+Pozwala on na sprawne i latwe budowanie obiektów w grze i przejrzyste manipulowanie nimi poprzez systemy.
+
+### MapCreator
+
+Plugin do Misy. Pozwala on tworzyć poziomy i mapy.
+
+Docelowmi trybami generowania mapy będą
+
+- `2D top-down`
+- `2D isometric`
+- `2D hexagonal`
+
+Kreator pozwala na tworznie zarazem małych jak i nieskończonych map poziomów.
+
+Misa wspiera generowanie map dynamicznie z plików na dysku co oznacza że możliwe jest tworzenie nieskończonych map oraz bez ekranów wczytywania.
+
+Mapcreator tworzy pliki binarne mapy które są kompatybilne z wbudowanym `wordlLoaderem` Misy.
+
+### FontParser
+
+FontParser to plugin do Misy pozwalający jednocześnie generować fonty z plików TTF jak i FontAtlasów.
+
+Posiada wbudowane technologie do Rasteryzacji oraz SDF dla najlepszych efektów i nieskończonego skalowania tekstu.
+
+### NaviGPU
+
+System tworzenia GUI wzorowany na HTML&CSS oraz projektach jak “imGui”.
+
+Jego założeniem jest pozwalać zbudować dobrze wyglądający UI zapewniający akceleracje graficzną za pomocą GPU.
+
+Pozwala na ręczne ustawianie elementów na ekranie za pomocą “pixeli” lub “procentu ekranu” jak i layout system podobny do Flexboxa w CSS.
+
+Kominukacja między NaviGPU a DOGMA nastepuje za pomocą sygnałów lub listenerów.
+
+## Current Progress:
+
+Development status:
+
+- silnik obecnie pozwala na tworzenie małych prostych gier typu mario czy
+  pokemony
+
+<br />
+Gotowość Modułów dla wersji: **0.01A**
+<br />
+
+- <Progress name="Editor" percent={10} status="Preplaning" />
+- <Progress name="Core" percent={75} status="In progress" />
+- <Progress name="Aurora" percent={80} status="In progress" />
+- <Progress name="Dogma" percent={90} status="In progress" />
+- <Progress name="MapCreator" percent={0} status="Preplaning" />
+- <Progress name="FontParser" percent={25} status="On hold" />
+- <Progress name="NaviGPU" percent={40} status="In progress" />

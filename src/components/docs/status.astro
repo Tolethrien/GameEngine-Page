@@ -1,0 +1,23 @@
+---
+import Progress from "../pages/progress.astro";
+
+interface Props {
+  name: string;
+  percent: number;
+  status:
+    | "On hold"
+    | "In progress"
+    | "Preplaning"
+    | "not Started"
+    | "Alpha"
+    | "Beta"
+    | "Ready";
+}
+const { name, percent, status } = Astro.props;
+---
+
+<div class="not-content flex gap-4 items-center col">
+  <p><b>{name}:</b></p>
+  <Progress percent={percent} />
+</div>
+<p><b>status</b>: {status}</p>

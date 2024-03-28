@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+/* starlight */
 :root {
   --sl-content-width: 60rem;
 }
@@ -20,4 +21,17 @@
 }
 .pagination-links {
   background-color: var(--sl-color-black);
+}
+
+/* pages */
+body {
+  padding: 0;
+  margin: 0;
+}
+.title-wrapper {
+  overflow: visible;
+}
+.site-title > img {
+  position: relative;
+  top: -0.8rem;
 }

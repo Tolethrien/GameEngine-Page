@@ -1,5 +1,5 @@
 ---
-title: First Frame
+title: Pierwsza Klatka
 sidebar:
   order: 3
 ---
@@ -15,9 +15,9 @@ import {
   TabItem,
 } from "@astrojs/starlight/components";
 import { Image } from "astro:assets";
-import img from "../../../assets/first-final.png";
+import img from "../../../../assets/first-final.png";
 
-## Work Work!
+## Praca Praca!
 
 Na początku warto zaznaczyć iż poradnik ten (mimo iż silnik jest zbudowany na tyle modułowo że każdy z elementów jego można zastąpić) bedzie używał wbudowanych w `Mise` komponentów jak
 [DOGMA]() (entity component system) czy [Aurora]()(renderer) dla łatwiejszej nauki i szybszego startu. Modyfikowanie silnika własnymi komponentami zostanie omówione w innym, bardziej zaawansowanym Poradniku.
@@ -64,7 +64,7 @@ Głównię służy do wczytywania assetów,tworzenia tekstur, configurowania ust
 ### Setup
 
 setup jest główną funkcją silnika, tutaj tworzony bedzie cały projekt. W tej funkcji konfiguruje się światy, dodaje obiekty, przypisuje systemy
-i tworzy "logikę" gry. Obecnie znajduje się w niej komenda `DogmaCre.createWorld("main")` która odpowiedzialna jest za stworzenie pierwszego świata
+i tworzy "logikę" gry. Obecnie znajduje się w niej komenda `DogmaCore.createWorld("main")` która odpowiedzialna jest za stworzenie pierwszego świata
 który można zacząć zapełniać! DogmaCore jest systemem ECS o którym więcej można poczytać [tutaj](https://pl.wikipedia.org/wiki/Entity-component-system).
 
 Na razie jedyne co musimy rozumieć to to że stworzyliśmy "swiat gry" który będziemy mogli zacząć zapełniać różnymi elementami czy mechanikami.

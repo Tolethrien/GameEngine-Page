@@ -1,0 +1,38 @@
+---
+import Button from "../components/pages/button.astro";
+import LangSelect from "../components/pages/langSelect.astro";
+import Logo from "../components/pages/logo.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta title="page" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body
+    class="flex flex-col bg-background bg-cover bg-no-repeat bg-bottom min-h-screen bg-x"
+  >
+    <header class="relative flex justify-between">
+      <div
+        class="bg-no-repeat bg-center bg-nav-back absolute top-0 left-0 w-full h-full opacity-30 -z-10"
+      >
+      </div>
+      <Logo />
+      <div class="flex gap-8">
+        <nav class="flex self-center gap-2">
+          <Button link="" name="Docs" />
+          <Button link="" name="Examples" />
+          <Button link="" name="Us" />
+        </nav>
+        <LangSelect />
+      </div>
+    </header>
+    <slot class="flex-grow" />
+    <footer class="bg-black">foot</footer>
+  </body>
+</html>

@@ -1,0 +1,24 @@
+---
+import { Image } from "astro:assets";
+import arrow from "../../assets/pages/arrow.png";
+---
+
+<label
+  for="languagePicker"
+  class="relative flex items-center gap-1 text-slate-200 mr-4"
+>
+  <span class="selectDefault"></span>
+  <select
+    id="languagePicker"
+    class="b-0 p-1 w-14 bg-transparent text-ellipsis text-inherit cursor-pointer appearance-none font-pixel text-sm *:bg-[#262c49]"
+  >
+    <option selected>EN</option>
+    <option>PL</option>
+  </select>
+  <Image
+    src={arrow}
+    alt="ArrowPick"
+    width={20}
+    class={"self-center rotate-90 absolute right-0 pointer-events-none"}
+  />
+</label>

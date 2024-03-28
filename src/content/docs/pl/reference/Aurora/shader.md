@@ -49,4 +49,3 @@ export default class AuroraShader {
 - `shaderName` - nazwa Shadera do wyciągnięcia.
 
 <hr />
-import type {BASE_GIT} from "../../../../baseUrl"

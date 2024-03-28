@@ -1,5 +1,5 @@
 ---
-title: "Introduction"
+title: "Wstęp"
 sidebar:
   order: 1
 ---
@@ -14,7 +14,7 @@ import {
   Tabs,
   TabItem,
 } from "@astrojs/starlight/components";
-import Progress from "../../../components/progress.astro";
+import Status from "../../../../components/docs/status.astro";
 
 ## GameEngine
 
@@ -116,12 +116,15 @@ Development status:
 
 <br />
 Gotowość Modułów dla wersji: **0.01A**
+
 <br />
 
-- <Progress name="Editor" percent={10} status="Preplaning" />
-- <Progress name="Core" percent={75} status="In progress" />
-- <Progress name="Aurora" percent={80} status="In progress" />
-- <Progress name="Dogma" percent={90} status="In progress" />
-- <Progress name="MapCreator" percent={0} status="Preplaning" />
-- <Progress name="FontParser" percent={25} status="On hold" />
-- <Progress name="NaviGPU" percent={40} status="In progress" />
+- <Status name="Editor" percent={10} status="Preplaning" />
+- <Status name="Core" percent={75} status="In progress" />
+- <Status name="Aurora" percent={80} status="In progress" />
+- <Status name="Dogma" percent={90} status="In progress" />
+- <Status name="MapCreator" percent={0} status="Preplaning" />
+- <Status name="FontParser" percent={25} status="On hold" />
+- <Status name="NaviGPU" percent={40} status="In progress" />
+
+stan na: **26.04.24**

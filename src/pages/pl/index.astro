@@ -1,0 +1,38 @@
+---
+import Browser from "../../components/pages/browser.astro";
+import Button from "../../components/pages/button.astro";
+import News from "../../components/pages/news.astro";
+import BaseLayout from "../../layouts/baseLayout.astro";
+import "../../styles/pagesStyle.css";
+---
+
+<BaseLayout>
+  <main
+    class="relative flex flex-col lg:flex-row gap-16 px-14 py-10 text-emerald-100 flex-grow leading-snug"
+  >
+    <section class="px-12 flex-1">
+      <h1 class="text-emerald-200 text-center">Easy to use game Engine</h1>
+      <p class="pt-8">
+        Misa is a small and easy to use 2D game engine designed for quick and
+        simple game development.
+      </p>
+      <ul class="pt-8 *:pt-2 *:ml-4">
+        <li>Based on Typescript</li>
+        <li>Build for Desktop and HTML5</li>
+        <li>Great for small and simple games</li>
+      </ul>
+      <p class="pt-6">Easy and simple doesn’t mean incapable</p>
+      <p class="pt-2">You can read more in our docs</p>
+      <Button
+        link=""
+        name="Read here!"
+        class="block ml-auto w-40 text-sm pr-8"
+        arrow
+      />
+    </section>
+    <section class="flex flex-1 items-end justify-center">
+      <Browser />
+      <News />
+    </section>
+  </main>
+</BaseLayout>

@@ -3,8 +3,11 @@ import logo from "../../assets/logos/logo-dark.png";
 import { Image } from "astro:assets";
 ---
 
-<div class="flex m-0 pl-4 text-2xl text-slate-100">
-  <p class="self-center">Misa</p>
-  <Image src={logo} alt="logo" width={60} />
+<div
+  id="logo"
+  class="z-10 m-0 flex pl-4 text-xl text-slate-100 md:gap-4 md:text-2xl lg:gap-0"
+>
+  <p class="hidden self-center lg:block">Misa</p>
+  <Image src={logo} alt="logo" class={"w-24 h-24 lg:w-16 lg:h-16"} />
   <p class="self-center">Misa</p>
 </div>

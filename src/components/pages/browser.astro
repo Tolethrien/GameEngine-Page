@@ -1,20 +1,24 @@
 ---
-
+interface Props {
+  class?: string;
+}
+const { class: added } = Astro.props;
 ---
 
-<div class="flex flex-col max-w-[30rem] mb-24">
+<div class={`mb-24 flex w-4/5 flex-col lg:w-full lg:max-w-[30rem] ${added}`}>
   <div
-    class="w-full flex gap-0 overflow-x-scroll *:flex-shrink-0 *:bg-label *:w-28 *:p-3 *:px-4 *:bg-contain *:bg-no-repeat *:bg-center *:bg-transparent *:font-pixel *:text-xs *:text-slate-200"
+    class="flex w-full gap-0 *:w-28 *:flex-shrink-0 *:bg-transparent *:bg-label *:bg-contain *:bg-center *:bg-no-repeat *:p-3 *:px-4 *:font-pixel *:text-xs *:text-slate-200"
   >
     <button>Aurora </button>
     <button>NaviGPU </button>
     <button>Dogma </button>
     <button>Engine</button>
-    <button>Stary</button>
   </div>
-  <div class="bg-pattern bg-[#39363E] rounded-b-lg h-60 overflow-y-scroll">
-    <p class="pt-4 pl-4 text-2xl">Aurora</p>
-    <p class="p-4 text-base">
+  <div
+    class="h-60 overflow-y-scroll rounded-bl-lg border-y-2 border-l-2 border-[#734316] bg-[#39363E] bg-pattern"
+  >
+    <p class="pl-4 pt-4 text-2xl">Aurora</p>
+    <p class="p-4 text-sm">
       WebGPU based rederer capable of gret things. Build In atcher to handle all
       you needs like lights and post-processing WebGPU based rederer capable of
       gret things. Build In atcher to handle all you needs like lights and

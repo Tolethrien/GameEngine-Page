@@ -1,5 +1,5 @@
 ---
-import Progress from "../pages/progress.astro";
+import Progress from "../pages/progressBar.astro";
 
 interface Props {
   name: string;
@@ -16,7 +16,7 @@ interface Props {
 const { name, percent, status } = Astro.props;
 ---
 
-<div class="not-content flex gap-4 items-center col">
+<div class="not-content col flex items-center gap-4">
   <p><b>{name}:</b></p>
   <Progress percent={percent} />
 </div>

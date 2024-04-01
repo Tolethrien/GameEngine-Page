@@ -10,6 +10,6 @@ const { link, name, class: added, arrow } = Astro.props;
 
 <a
   href={link}
-  class={`w-36  text-slate-100 ${arrow ? "bg-button-arrow" : "bg-button-no-arrow"} bg-contain bg-no-repeat bg-center p-4 text-center no-underline ${added}`}
+  class={`min-w-36 p-6 lg:p-4  text-slate-100 ${arrow ? "bg-button-arrow" : "bg-button-no-arrow"} bg-contain bg-no-repeat bg-center text-center no-underline ${added}`}
   >{name}</a
 >

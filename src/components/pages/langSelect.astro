@@ -1,16 +1,20 @@
 ---
 import { Image } from "astro:assets";
 import arrow from "../../assets/pages/arrow.png";
+interface Props {
+  class?: string;
+}
+const { class: added } = Astro.props;
 ---
 
 <label
   for="languagePicker"
-  class="relative flex items-center gap-1 text-slate-200 mr-4"
+  class={`absolute lg:relative mr-4 flex items-center gap-1 text-slate-200 lg:top-auto lg:right-auto lg:left-auto lg:bottom-auto ${added}`}
 >
   <span class="selectDefault"></span>
   <select
     id="languagePicker"
-    class="b-0 p-1 w-14 bg-transparent text-ellipsis text-inherit cursor-pointer appearance-none font-pixel text-sm *:bg-[#262c49]"
+    class="b-0 w-14 cursor-pointer appearance-none text-ellipsis bg-transparent p-1 font-pixel text-sm text-inherit *:bg-[#262c49]"
   >
     <option selected>EN</option>
     <option>PL</option>

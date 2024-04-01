@@ -2,21 +2,40 @@
 import Browser from "../../components/pages/browser.astro";
 import Button from "../../components/pages/button.astro";
 import News from "../../components/pages/news.astro";
+import Progress from "../../components/pages/progress.astro";
 import BaseLayout from "../../layouts/baseLayout.astro";
 import "../../styles/pagesStyle.css";
+const features = [
+  {
+    name: "Aurora",
+    desc: "WebGPU based rederer capable of gret things. Build In atcher to handle all you needs like lights and post-processing WebGPU based rederer capable of gret things",
+  },
+  {
+    name: "NaviGPU",
+    desc: "WebGPU based rederer capable of gret things. Build In atcher to handle all you needs like lights and post-processing WebGPU based rederer capable of gret things",
+  },
+  {
+    name: "Dogma",
+    desc: "WebGPU based rederer capable of gret things. Build In atcher to handle all you needs like lights and post-processing WebGPU based rederer capable of gret things",
+  },
+  {
+    name: "Engine",
+    desc: "WebGPU based rederer capable of gret things. Build In atcher to handle all you needs like lights and post-processing WebGPU based rederer capable of gret things",
+  },
+];
 ---
 
 <BaseLayout>
   <main
-    class="relative flex flex-col lg:flex-row gap-16 px-14 py-10 text-emerald-100 flex-grow leading-snug"
+    class="relative grid flex-grow grid-cols-1 gap-32 py-16 text-emerald-100 md:px-14 lg:grid-cols-2 lg:gap-16 xl:leading-snug"
   >
-    <section class="px-12 flex-1">
-      <h1 class="text-emerald-200 text-center">Easy to use game Engine</h1>
+    <section class="px-6 sm:px-12 md:m-8 md:px-16 lg:m-0">
+      <h1 class="text-center text-emerald-200">Easy to use game Engine</h1>
       <p class="pt-8">
         Misa is a small and easy to use 2D game engine designed for quick and
         simple game development.
       </p>
-      <ul class="pt-8 *:pt-2 *:ml-4">
+      <ul class="pt-8 *:ml-4 *:pt-2">
         <li>Based on Typescript</li>
         <li>Build for Desktop and HTML5</li>
         <li>Great for small and simple games</li>
@@ -26,13 +45,26 @@ import "../../styles/pagesStyle.css";
       <Button
         link=""
         name="Read here!"
-        class="block ml-auto w-40 text-sm pr-8"
+        class="ml-auto mt-4 block w-40 pr-8 text-sm lg:w-48"
         arrow
       />
     </section>
-    <section class="flex flex-1 items-end justify-center">
-      <Browser />
-      <News />
+    <section class="flex lg:items-end">
+      <Browser class="hidden md:block" />
+      <div class="grid gap-16 md:hidden">
+        {
+          features.map((feature) => (
+            <div>
+              <h2 class="w-full py-4 text-center backdrop-brightness-75">
+                {feature.name}
+              </h2>
+              <p class="p-6">{feature.desc}</p>
+            </div>
+          ))
+        }
+      </div>
     </section>
+    <News />
+    <Progress />
   </main>
 </BaseLayout>

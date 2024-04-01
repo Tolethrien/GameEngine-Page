@@ -14,20 +14,13 @@
     width: 5px;
     height: 5px;
   }
-
-  /* Track */
   ::-webkit-scrollbar-track {
     background: #37343b;
-    border-radius: 5px;
   }
-
-  /* Handle */
   ::-webkit-scrollbar-thumb {
-    background: #734316;
     border-radius: 5px;
+    background: #734316;
   }
-
-  /* Handle on hover */
   ::-webkit-scrollbar-thumb:hover {
     background: #482a0e;
   }

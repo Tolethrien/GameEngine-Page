@@ -2,6 +2,10 @@
 import Button from "../components/pages/button.astro";
 import LangSelect from "../components/pages/langSelect.astro";
 import Logo from "../components/pages/logo.astro";
+import Image from "astro/components/Image.astro";
+import logoDead from "../assets/logos/logo-dead.png";
+import News from "../components/pages/news.astro";
+import Progress from "../components/pages/progress.astro";
 ---
 
 <html lang="en">
@@ -14,25 +18,62 @@ import Logo from "../components/pages/logo.astro";
       rel="stylesheet"
     />
   </head>
-  <body
-    class="flex flex-col bg-background bg-cover bg-no-repeat bg-bottom min-h-screen bg-x"
-  >
-    <header class="relative flex justify-between">
-      <div
-        class="bg-no-repeat bg-center bg-nav-back absolute top-0 left-0 w-full h-full opacity-30 -z-10"
-      >
-      </div>
-      <Logo />
-      <div class="flex gap-8">
-        <nav class="flex self-center gap-2">
-          <Button link="" name="Docs" />
-          <Button link="" name="Examples" />
-          <Button link="" name="Us" />
-        </nav>
-        <LangSelect />
-      </div>
-    </header>
-    <slot class="flex-grow" />
-    <footer class="bg-black">foot</footer>
+  <body class="overflow-x-hidden bg-[#151827]">
+    <div
+      class="m-auto flex min-h-screen max-w-screen-2xl flex-col bg-background bg-cover bg-fixed bg-bottom bg-no-repeat"
+    >
+      <header class="relative flex justify-between">
+        <div
+          class="absolute left-0 top-0 hidden h-4/5 w-full bg-nav-back bg-center bg-no-repeat opacity-30 lg:inline-block"
+        >
+        </div>
+        <Logo />
+        <button
+          id="hamb"
+          class="z-20 mr-6 mt-4 h-12 w-12 bg-transparent bg-hamburger-open bg-contain bg-center bg-no-repeat lg:hidden"
+        ></button>
+
+        <div
+          id="navi"
+          class="fixed left-1/2 top-0 z-10 hidden h-full w-full -translate-x-1/2 flex-col items-center justify-center gap-16 backdrop-blur backdrop-brightness-50 lg:static lg:flex lg:translate-x-0 lg:flex-row lg:justify-end lg:gap-8 lg:backdrop-filter-none"
+        >
+          <nav class="flex flex-col gap-2 self-center lg:flex-row">
+            <Button link="/pl/intro/intro/" name="Docs" class="w-48 lg:w-36" />
+            <Button link="" name="Examples" class="w-48 lg:w-36" />
+            <Button link="" name="Us" class="w-48 lg:w-36" />
+          </nav>
+          <Image
+            src={logoDead}
+            alt="logo"
+            class={"w-28 h-28 z-20 absolute lg:hidden left-1/2 top-4 -translate-x-1/2"}
+          />
+          <News mobile />
+          <Progress mobile />
+          <LangSelect class="bottom-6 right-6" />
+        </div>
+      </header>
+      <slot id="slot" class="flex-grow" />
+      <footer class="min-h-8 bg-black text-slate-200">
+        <p class="text-right">milfinity</p>
+      </footer>
+    </div>
   </body>
 </html>
+<script>
+  const button = document.getElementById("hamb");
+  const navi = document.getElementById("navi");
+  const logo = document.getElementById("logo");
+  const slot = document.getElementsByTagName("body")[0];
+
+  button?.addEventListener("click", () => {
+    slot.classList.toggle("overflow-hidden");
+    logo?.classList.toggle("invisible");
+    if (navi?.classList.contains("hidden")) {
+      navi.classList.replace("hidden", "flex");
+      button.classList.replace("bg-hamburger-open", "bg-hamburger-close");
+    } else {
+      navi?.classList.replace("flex", "hidden");
+      button.classList.replace("bg-hamburger-close", "bg-hamburger-open");
+    }
+  });
+</script>

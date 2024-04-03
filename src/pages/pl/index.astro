@@ -5,24 +5,6 @@ import News from "../../components/pages/news.astro";
 import Progress from "../../components/pages/progress.astro";
 import BaseLayout from "../../layouts/baseLayout.astro";
 import "../../styles/pagesStyle.css";
-const features = [
-  {
-    name: "Aurora",
-    desc: "WebGPU based rederer capable of gret things. Build In atcher to handle all you needs like lights and post-processing WebGPU based rederer capable of gret things",
-  },
-  {
-    name: "NaviGPU",
-    desc: "WebGPU based rederer capable of gret things. Build In atcher to handle all you needs like lights and post-processing WebGPU based rederer capable of gret things",
-  },
-  {
-    name: "Dogma",
-    desc: "WebGPU based rederer capable of gret things. Build In atcher to handle all you needs like lights and post-processing WebGPU based rederer capable of gret things",
-  },
-  {
-    name: "Engine",
-    desc: "WebGPU based rederer capable of gret things. Build In atcher to handle all you needs like lights and post-processing WebGPU based rederer capable of gret things",
-  },
-];
 ---
 
 <BaseLayout>
@@ -49,9 +31,9 @@ const features = [
         arrow
       />
     </section>
-    <section class="flex lg:items-end">
+    <section class="flex items-center md:justify-center lg:items-end">
       <Browser class="hidden md:block" />
-      <div class="grid gap-16 md:hidden">
+      <!-- <div class="grid gap-16 text-slate-200 md:hidden">
         {
           features.map((feature) => (
             <div>
@@ -62,8 +44,33 @@ const features = [
             </div>
           ))
         }
+      </div> -->
+      <div class="flex w-screen flex-col md:hidden">
+        <div
+          class="flex w-full gap-0 overflow-y-auto *:w-28 *:flex-shrink-0 *:bg-transparent *:bg-label *:bg-contain *:bg-center *:bg-no-repeat *:p-3 *:px-4 *:font-pixel *:text-xs *:text-slate-200"
+        >
+          <button>Aurora </button>
+          <button>NaviGPU </button>
+          <button>Dogma </button>
+          <button>Engine</button>
+        </div>
+        <div class="h-80 overflow-y-scroll">
+          <p class="pl-4 pt-4 text-center text-2xl">Aurora</p>
+          <p class="p-4 text-sm">
+            WebGPU based rederer capable of gret things. Build In atcher to
+            handle all you needs like lights and post-processing WebGPU based
+            rederer capable of gret things. Build In atcher to handle all you
+            needs like lights and post-processing WebGPU based rederer capable
+            of gret things. Build In atcher to handle all you needs like lights
+            and post-processing WebGPU based rederer capable of gret things.
+            Build In atcher to handle all you needs like lights and
+            post-processing WebGPU based rederer capable of gret things. Build
+            In atcher to handle all you needs like lights and post-processing
+          </p>
+        </div>
       </div>
     </section>
+    <!-- https://github.com/nunatass/animated-gradients -->
     <News />
     <Progress />
   </main>

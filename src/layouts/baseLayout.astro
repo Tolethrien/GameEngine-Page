@@ -6,6 +6,8 @@ import Image from "astro/components/Image.astro";
 import logoDead from "../assets/logos/logo-dead.png";
 import News from "../components/pages/news.astro";
 import Progress from "../components/pages/progress.astro";
+import "../styles/pagesStyle.css";
+import { ViewTransitions } from "astro:transitions";
 ---
 
 <html lang="en">
@@ -17,6 +19,7 @@ import Progress from "../components/pages/progress.astro";
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
+    <ViewTransitions />
   </head>
   <body class="overflow-x-hidden bg-[#151827]">
     <div
@@ -39,7 +42,11 @@ import Progress from "../components/pages/progress.astro";
         >
           <nav class="flex flex-col gap-2 self-center lg:flex-row">
             <Button link="/pl/intro/intro/" name="Docs" class="w-48 lg:w-36" />
-            <Button link="" name="Examples" class="w-48 lg:w-36" />
+            <Button
+              link="./examples/aurora"
+              name="Examples"
+              class="w-48 lg:w-36"
+            />
             <Button link="" name="Us" class="w-48 lg:w-36" />
           </nav>
           <Image
@@ -52,28 +59,28 @@ import Progress from "../components/pages/progress.astro";
           <LangSelect class="left-6 top-6" />
         </div>
       </header>
-      <slot id="slot" class="flex-grow" />
+      <slot id="slot" />
       <footer class="min-h-8 bg-black text-slate-200">
         <p class="text-right">milfinity</p>
       </footer>
     </div>
+    <script>
+      const button = document.getElementById("hamb");
+      const navi = document.getElementById("navi");
+      const logo = document.getElementById("logo");
+      const slot = document.getElementsByTagName("body")[0];
+
+      button?.addEventListener("click", () => {
+        slot.classList.toggle("overflow-hidden");
+        logo?.classList.toggle("invisible");
+        if (navi?.classList.contains("hidden")) {
+          navi.classList.replace("hidden", "flex");
+          button.classList.replace("bg-hamburger-open", "bg-hamburger-close");
+        } else {
+          navi?.classList.replace("flex", "hidden");
+          button.classList.replace("bg-hamburger-close", "bg-hamburger-open");
+        }
+      });
+    </script>
   </body>
 </html>
-<script>
-  const button = document.getElementById("hamb");
-  const navi = document.getElementById("navi");
-  const logo = document.getElementById("logo");
-  const slot = document.getElementsByTagName("body")[0];
-
-  button?.addEventListener("click", () => {
-    slot.classList.toggle("overflow-hidden");
-    logo?.classList.toggle("invisible");
-    if (navi?.classList.contains("hidden")) {
-      navi.classList.replace("hidden", "flex");
-      button.classList.replace("bg-hamburger-open", "bg-hamburger-close");
-    } else {
-      navi?.classList.replace("flex", "hidden");
-      button.classList.replace("bg-hamburger-close", "bg-hamburger-open");
-    }
-  });
-</script>

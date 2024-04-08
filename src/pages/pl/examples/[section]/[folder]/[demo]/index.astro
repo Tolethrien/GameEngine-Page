@@ -1,0 +1,51 @@
+---
+import { getEntry } from "astro:content";
+import {
+  getDemoPaths,
+  getSectionNames,
+} from "../../../../../../utils/staticPath";
+import { assert } from "../../../../../../utils/assert";
+import Browser from "../../../../../../components/pages/browser.astro";
+import BaseLayout from "../../../../../../layouts/baseLayout.astro";
+import arrow from "../../../../../../assets/pages/arrow.png";
+import { Image } from "astro:assets";
+
+export async function getStaticPaths() {
+  return await getDemoPaths();
+}
+const { demo } = Astro.params;
+const sections = await getSectionNames();
+
+const path = Astro.url.pathname.split("examples");
+const url = path[0].split("/")[1] + path[1];
+const entry = await getEntry("demos", url);
+assert(entry);
+const { Content } = await entry.render();
+---
+
+<BaseLayout>
+  <section
+    class="my-8 flex w-5/6 flex-grow items-center justify-center self-center justify-self-center"
+  >
+    <Browser class="lg:w-full lg:max-w-full">
+      {
+        Array.from(sections).map((name) => (
+          <button slot="Buttons">{name}</button>
+        ))
+      }
+      <div slot="content">
+        <div class="flex items-center gap-6 pl-8 pt-4 text-sm text-slate-200">
+          <Image src={arrow} alt="go back" class={"rotate-180 w-8 h-8"} />
+          <div class="w-1/2 rounded-lg bg-slate-800 p-2">
+            <p class="pl-4">Examples/Aurora</p>
+          </div>
+        </div>
+        <div
+          class="grid h-[calc(60dvh-1.5rem)] auto-rows-min grid-cols-5 gap-4 overflow-y-auto py-6"
+        >
+          <Content />
+        </div>
+      </div>
+    </Browser>
+  </section>
+</BaseLayout>

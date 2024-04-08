@@ -3,6 +3,13 @@ import starlight from "@astrojs/starlight";
 import tailwind from "@astrojs/tailwind";
 // https://astro.build/config
 export default defineConfig({
+  i18n: {
+    defaultLocale: "pl",
+    locales: ["pl", "en"],
+    routing: {
+      prefixDefaultLocale: true,
+    },
+  },
   integrations: [
     tailwind({ applyBaseStyles: false, nesting: true }),
     starlight({

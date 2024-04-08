@@ -1,0 +1,25 @@
+---
+import { getCollection } from "astro:content";
+import { getFolderPaths } from "../../../../../utils/staticPath";
+
+export async function getStaticPaths() {
+  return await getFolderPaths();
+}
+const { folder } = Astro.params;
+const files = await getCollection(
+  "demos",
+  ({ slug }) => slug.startsWith("pl") && slug.includes(folder as string)
+);
+---
+
+<h1>Files</h1>
+{
+  files.map(({ slug, data }) => {
+    const url = slug.split("/").splice(2).join("/");
+    return (
+      <a href={`./${url}`}>
+        {data.title} <br />
+      </a>
+    );
+  })
+}

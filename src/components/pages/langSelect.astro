@@ -1,10 +1,16 @@
 ---
 import { Image } from "astro:assets";
 import arrow from "../../assets/pages/arrow.png";
+import { getRelativeLocaleUrl } from "astro:i18n";
 interface Props {
   class?: string;
 }
 const { class: added } = Astro.props;
+const path = Astro.url.pathname.slice(4);
+const langs = {
+  EN: getRelativeLocaleUrl("en") + path,
+  PL: getRelativeLocaleUrl("pl") + path,
+};
 ---
 
 <label
@@ -16,8 +22,13 @@ const { class: added } = Astro.props;
     id="languagePicker"
     class="b-0 w-14 cursor-pointer appearance-none text-ellipsis bg-transparent p-1 font-pixel text-sm text-inherit *:bg-[#262c49]"
   >
-    <option selected>EN</option>
-    <option>PL</option>
+    {
+      Object.entries(langs).map(([key, value]) => (
+        <option value={value} selected={Astro.url.pathname.includes("/pl/")}>
+          {key}
+        </option>
+      ))
+    }
   </select>
   <Image
     src={arrow}
@@ -26,3 +37,9 @@ const { class: added } = Astro.props;
     class={"self-center rotate-90 absolute right-0 pointer-events-none"}
   />
 </label>
+
+<script>
+  document.getElementById("languagePicker")?.addEventListener("change", (e) => {
+    window.location.href = (e.target as HTMLSelectElement).value;
+  });
+</script>

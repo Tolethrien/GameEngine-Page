@@ -1,0 +1,24 @@
+---
+import { getEntry } from "astro:content";
+import { assert } from "../../../../../../utils/assert";
+import { getDemoPaths } from "../../../../../../utils/staticPath";
+
+export async function getStaticPaths() {
+  return await getDemoPaths();
+}
+let isTranslated = true;
+const { demo } = Astro.params;
+const path = Astro.url.pathname.split("examples");
+const url = path[0].split("/")[1] + path[1];
+let entry = await getEntry("demos", url);
+if (!entry) {
+  isTranslated = false;
+  entry = await getEntry("demos", "pl" + path[1]);
+}
+assert(entry);
+const { Content } = await entry.render();
+---
+
+{!isTranslated && <p>fallback to polish</p>}
+<h1>this is {demo}, a decent car</h1>
+<Content />

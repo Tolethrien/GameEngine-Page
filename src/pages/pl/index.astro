@@ -4,7 +4,6 @@ import Button from "../../components/pages/button.astro";
 import News from "../../components/pages/news.astro";
 import Progress from "../../components/pages/progress.astro";
 import BaseLayout from "../../layouts/baseLayout.astro";
-import "../../styles/pagesStyle.css";
 ---
 
 <BaseLayout>
@@ -32,7 +31,27 @@ import "../../styles/pagesStyle.css";
       />
     </section>
     <section class="flex items-center md:justify-center lg:items-end">
-      <Browser class="hidden md:block" />
+      <Browser class="hidden md:block lg:mb-24">
+        {
+          ["Aurora", "NaviGPU", "Dogma", "Engine", "Dupa", "Sik"].map(
+            (name) => <button slot="Buttons">{name}</button>
+          )
+        }
+        <div class="h-80" slot="content">
+          <p class="pl-4 pt-4 text-center text-2xl">Aurora</p>
+          <p class="p-4 text-sm">
+            WebGPU based rederer capable of gret things. Build In atcher to
+            handle all you needs like lights and post-processing WebGPU based
+            rederer capable of gret things. Build In atcher to handle all you
+            needs like lights and post-processing WebGPU based rederer capable
+            of gret things. Build In atcher to handle all you needs like lights
+            and post-processing WebGPU based rederer capable of gret things.
+            Build In atcher to handle all you needs like lights and
+            post-processing WebGPU based rederer capable of gret things. Build
+            In atcher to handle all you needs like lights and post-processing
+          </p>
+        </div>
+      </Browser>
       <!-- <div class="grid gap-16 text-slate-200 md:hidden">
         {
           features.map((feature) => (
@@ -53,8 +72,12 @@ import "../../styles/pagesStyle.css";
           <button>NaviGPU </button>
           <button>Dogma </button>
           <button>Engine</button>
+          <button>Dup</button>
+          <button>Loso</button>
         </div>
-        <div class="h-80 overflow-y-auto">
+        <div
+          class="h-80 overflow-y-auto border-[#734316] bg-[#39363E] bg-pattern"
+        >
           <p class="pl-4 pt-4 text-center text-2xl">Aurora</p>
           <p class="p-4 text-sm">
             WebGPU based rederer capable of gret things. Build In atcher to

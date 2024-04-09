@@ -70,23 +70,24 @@ const { lang } = getCurrentPath(Astro.url);
         <p class="text-right">milfinity</p>
       </footer>
     </div>
-    <script>
-      const button = document.getElementById("hamb");
-      const navi = document.getElementById("navi");
-      const logo = document.getElementById("logo");
-      const slot = document.getElementsByTagName("body")[0];
-
-      button?.addEventListener("click", () => {
-        slot.classList.toggle("overflow-hidden");
-        logo?.classList.toggle("invisible");
-        if (navi?.classList.contains("hidden")) {
-          navi.classList.replace("hidden", "flex");
-          button.classList.replace("bg-hamburger-open", "bg-hamburger-close");
-        } else {
-          navi?.classList.replace("flex", "hidden");
-          button.classList.replace("bg-hamburger-close", "bg-hamburger-open");
-        }
-      });
-    </script>
   </body>
 </html>
+
+<script>
+  const button = document.getElementById("hamb");
+  const navi = document.getElementById("navi");
+  const logo = document.getElementById("logo");
+  const slot = document.getElementsByTagName("body")[0];
+
+  button?.addEventListener("click", () => {
+    slot.classList.toggle("overflow-hidden");
+    logo?.classList.toggle("invisible");
+    if (navi?.classList.contains("hidden")) {
+      navi.classList.replace("hidden", "flex");
+      button.classList.replace("bg-hamburger-open", "bg-hamburger-close");
+    } else {
+      navi?.classList.replace("flex", "hidden");
+      button.classList.replace("bg-hamburger-close", "bg-hamburger-open");
+    }
+  });
+</script>

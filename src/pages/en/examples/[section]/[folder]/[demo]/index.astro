@@ -13,14 +13,15 @@ export async function getStaticPaths() {
 }
 let isTranslated = true;
 const { lang, path } = getCurrentPath(Astro.url, ["examples"]);
+//workaround: Astrobug with getEntry, cannot find slug, urls have "/" at the end
 const url = `${lang}/${path}`;
-console.log("pl/" + path);
 let entry = await getEntry("demos", url);
 if (!entry) {
   isTranslated = false;
-  entry = await getEntry("demos", "pl/" + path);
+
+  entry = await getEntry("demos", `pl/${path}`);
 }
-// assert(entry);
+assert(entry);
 const { Content } = await entry!.render();
 ---
 

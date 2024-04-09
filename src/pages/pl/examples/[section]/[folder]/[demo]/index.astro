@@ -1,5 +1,5 @@
 ---
-import { getEntry } from "astro:content";
+import { getEntryBySlug } from "astro:content";
 import {
   getCurrentPath,
   getDemoPaths,
@@ -7,15 +7,17 @@ import {
 import { assert } from "../../../../../../utils/assert";
 import Browser from "../../../../../../components/pages/browser.astro";
 import BaseLayout from "../../../../../../layouts/baseLayout.astro";
+import { getCollection } from "astro:content";
+import { getEntry } from "astro:content";
 
 export async function getStaticPaths() {
   return await getDemoPaths();
 }
-const { lang, path } = getCurrentPath(Astro.url, ["examples"]);
+const { path, lang } = getCurrentPath(Astro.url, ["examples"]);
 const url = `${lang}/${path}`;
 const entry = await getEntry("demos", url);
-// assert(entry);
-const { Content } = await entry!.render();
+assert(entry);
+const { Content } = await entry.render();
 ---
 
 <BaseLayout>

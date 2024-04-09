@@ -1,15 +1,15 @@
 import { getCollection } from "astro:content";
-
 export const getCurrentPath = (url: URL, remove?: string[]) => {
-  let rawPath = url.pathname.split("/");
-  let path = rawPath.slice().splice(2);
+  let rawPath = url.pathname.split("/").filter(Boolean);
+  let path = rawPath.slice().splice(1);
   if (remove) {
     path = path.filter((element) => !remove.includes(element));
   }
+
   return {
     path: path.join("/"),
-    lang: rawPath[1],
-    array: rawPath,
+    lang: rawPath[0],
+    array: rawPath.splice(1),
     raw: url.pathname,
   };
 };

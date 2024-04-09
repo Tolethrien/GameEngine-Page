@@ -14,8 +14,8 @@ export async function getStaticPaths() {
 const { lang, path } = getCurrentPath(Astro.url, ["examples"]);
 const url = `${lang}/${path}`;
 const entry = await getEntry("demos", url);
-assert(entry);
-const { Content } = await entry.render();
+// assert(entry);
+const { Content } = await entry!.render();
 ---
 
 <BaseLayout>

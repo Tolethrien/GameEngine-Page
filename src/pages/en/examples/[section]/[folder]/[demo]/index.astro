@@ -20,8 +20,8 @@ if (!entry) {
   isTranslated = false;
   entry = await getEntry("demos", "pl/" + path);
 }
-assert(entry);
-const { Content } = await entry.render();
+// assert(entry);
+const { Content } = await entry!.render();
 ---
 
 <BaseLayout>

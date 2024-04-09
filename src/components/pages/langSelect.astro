@@ -6,7 +6,7 @@ interface Props {
   class?: string;
 }
 const { class: added } = Astro.props;
-const { path } = getCurrentPath(Astro.url);
+const { path, lang } = getCurrentPath(Astro.url);
 
 const langs = {
   EN: "/en/" + path,
@@ -25,7 +25,7 @@ const langs = {
   >
     {
       Object.entries(langs).map(([key, value]) => (
-        <option value={value} selected={Astro.url.pathname.startsWith("/pl")}>
+        <option value={value} selected={lang === "pl"}>
           {key}
         </option>
       ))
@@ -40,7 +40,8 @@ const langs = {
 </label>
 
 <script>
-  document.getElementById("languagePicker")?.addEventListener("change", (e) => {
-    window.location.href = (e.target as HTMLSelectElement).value;
-  });
+  import { navigate } from "astro:transitions/client";
+  const select = document.querySelector("select");
+  if (select)
+    select.onchange = (ev) => navigate((ev.target as HTMLSelectElement).value);
 </script>

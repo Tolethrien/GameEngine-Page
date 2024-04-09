@@ -22,13 +22,11 @@ const path = array.at(-1);
     class="my-8 flex w-5/6 flex-grow items-center justify-center self-center justify-self-center"
   >
     <Browser class="lg:w-full lg:max-w-full">
-      <div>
-        {
-          Array.from(folderNames).map((folder) => (
-            <Folder path={`./${path}/${folder}`} folderName={folder} />
-          ))
-        }
-      </div>
+      {
+        Array.from(folderNames).map((folder) => (
+          <Folder path={`./${path}/${folder}`} folderName={folder} />
+        ))
+      }
     </Browser>
   </section>
 </BaseLayout>

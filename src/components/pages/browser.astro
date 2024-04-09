@@ -2,39 +2,48 @@
 import { Image } from "astro:assets";
 import arrow from "../../assets/pages/arrow.png";
 import { getCurrentPath, getSectionNames } from "../../utils/staticPath";
-interface Props {
-  class?: string;
-}
-const { class: added } = Astro.props;
+
 const sections = await getSectionNames();
-const { lang } = getCurrentPath(Astro.url);
+const { lang, path, array } = getCurrentPath(Astro.url);
+const goBack = () => {
+  if (array.length <= 2) return `/${lang}/${array.join("/")}`;
+  return `/${lang}/${array.slice(0, -1).join("/")}`;
+};
 ---
 
-<div class={`flex w-4/5 flex-col lg:w-full ${added}`}>
-  <div
-    class="flex w-full gap-0 overflow-auto *:w-28 *:flex-shrink-0 *:bg-transparent *:bg-label *:bg-contain *:bg-center *:bg-no-repeat *:p-3 *:px-4 *:font-pixel *:text-xs *:text-slate-200"
-  >
+<div class="flex w-4/5 flex-col lg:w-full">
+  <div class="flex w-full gap-2 overflow-x-auto overflow-y-hidden pl-2">
     {
       Array.from(sections).map((name) => (
-        <button slot="Buttons">
-          <a href={`/${lang}/examples/${name}`} class="text-slate-200">
-            {name}
-          </a>
-        </button>
+        <a
+          href={`/${lang}/examples/${name}`}
+          class={`w-28 flex-shrink-0 bg-label bg-contain bg-center bg-no-repeat p-4 px-2 text-center font-pixel text-xs text-slate-200 no-underline ${path.includes(name) ? "scale-110 hue-rotate-60" : "brightness-75"}`}
+        >
+          {name.at(0)?.toUpperCase() + name.slice(1)}
+        </a>
       ))
     }
   </div>
+  <!-- //glowny -->
   <div
-    class="flex-grow rounded-bl-lg border-y-2 border-l-2 border-[#734316] bg-[#39363E] bg-pattern"
+    class="flex-grow rounded-bl-xl border-2 border-[#734316] bg-[#39363E] bg-pattern"
   >
-    <div class="flex items-center gap-6 pl-8 pt-4 text-sm text-slate-200">
-      <Image src={arrow} alt="go back" class={"rotate-180 w-8 h-8"} />
+    <div
+      class="flex items-center gap-6 border-b-2 border-[#39363E] p-4 pl-8 text-sm text-slate-200 shadow-xl"
+    >
+      <a href={goBack()} class="flex items-center">
+        <Image
+          src={arrow}
+          alt="go back"
+          class={`rotate-180 w-8 h-8 ${array.length === 2 && "brightness-50"}`}
+        />
+      </a>
       <div class="w-1/2 rounded-lg bg-slate-800 p-2">
-        <p class="pl-4">Examples/Aurora</p>
+        <p class="pl-4">{path}</p>
       </div>
     </div>
     <div
-      class="grid h-[calc(60dvh-1.5rem)] auto-rows-min grid-cols-5 gap-4 overflow-y-auto py-6"
+      class="grid h-[calc(60dvh-3rem)] auto-rows-min grid-cols-5 gap-4 overflow-y-auto py-6"
     >
       <slot />
     </div>

@@ -14,7 +14,7 @@ export const getCurrentPath = (url: URL, remove?: string[]) => {
   };
 };
 export const getSectionNames = async () => {
-  const sections = new Set();
+  const sections = new Set<string>();
   const collecion = await getCollecion();
   collecion.forEach(({ slug }) => sections.add(slug.split("/")[1]));
   return sections;

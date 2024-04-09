@@ -20,14 +20,12 @@ const files = await getCollection(
     class="my-8 flex w-5/6 flex-grow items-center justify-center self-center justify-self-center"
   >
     <Browser class="lg:w-full lg:max-w-full">
-      <div>
-        {
-          files.map(({ data, slug }) => {
-            const url = slug.split("/").splice(2).join("/");
-            return <Demo path={`./${url}`} fileName={data.title} />;
-          })
-        }
-      </div>
+      {
+        files.map(({ data, slug }) => {
+          const url = slug.split("/").splice(2).join("/");
+          return <Demo path={`./${url}`} fileName={data.title} />;
+        })
+      }
     </Browser>
   </section>
 </BaseLayout>

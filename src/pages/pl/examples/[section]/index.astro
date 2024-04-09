@@ -1,22 +1,20 @@
 ---
 import { getCollection } from "astro:content";
-import { getSectionNames, getSectionPaths } from "../../../../utils/staticPath";
+import { getCurrentPath, getSectionPaths } from "../../../../utils/staticPath";
 import BaseLayout from "../../../../layouts/baseLayout.astro";
 import Browser from "../../../../components/pages/browser.astro";
-import { Image } from "astro:assets";
-import arrow from "../../../../assets/pages/arrow.png";
 import Folder from "../../../../components/pages/folder.astro";
 export async function getStaticPaths() {
   return await getSectionPaths();
 }
 const { section } = Astro.params;
-const sections = await getSectionNames();
 const folders = await getCollection("demos", ({ slug }) =>
   slug.includes(section as string)
 );
 const folderNames = new Set<string>();
 folders.forEach(({ slug }) => folderNames.add(slug.split("/")[2]));
-const path = Astro.url.pathname.split("/").at(-1);
+const { array } = getCurrentPath(Astro.url);
+const path = array.at(-1);
 ---
 
 <BaseLayout>
@@ -24,31 +22,12 @@ const path = Astro.url.pathname.split("/").at(-1);
     class="my-8 flex w-5/6 flex-grow items-center justify-center self-center justify-self-center"
   >
     <Browser class="lg:w-full lg:max-w-full">
-      {
-        Array.from(sections).map((name) => (
-          <button slot="Buttons">
-            <a href={`/pl/examples/${name}`} class="text-slate-200">
-              {name}
-            </a>
-          </button>
-        ))
-      }
-      <div slot="content">
-        <div class="flex items-center gap-6 pl-8 pt-4 text-sm text-slate-200">
-          <Image src={arrow} alt="go back" class={"rotate-180 w-8 h-8"} />
-          <div class="w-1/2 rounded-lg bg-slate-800 p-2">
-            <p class="pl-4">Examples/Aurora</p>
-          </div>
-        </div>
-        <div
-          class="grid h-[calc(60dvh-1.5rem)] auto-rows-min grid-cols-5 gap-4 overflow-y-auto py-6"
-        >
-          {
-            Array.from(folderNames).map((folder) => (
-              <Folder path={`./${path}/${folder}`} folderName={folder} />
-            ))
-          }
-        </div>
+      <div>
+        {
+          Array.from(folderNames).map((folder) => (
+            <Folder path={`./${path}/${folder}`} folderName={folder} />
+          ))
+        }
       </div>
     </Browser>
   </section>

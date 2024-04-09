@@ -8,6 +8,8 @@ import News from "../components/pages/news.astro";
 import Progress from "../components/pages/progress.astro";
 import "../styles/pagesStyle.css";
 import { ViewTransitions } from "astro:transitions";
+import { getCurrentPath } from "../utils/staticPath";
+const { lang } = getCurrentPath(Astro.url);
 ---
 
 <html lang="en">
@@ -19,7 +21,7 @@ import { ViewTransitions } from "astro:transitions";
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <ViewTransitions />
+    <!-- <ViewTransitions /> -->
   </head>
   <body class="overflow-x-hidden bg-[#151827]">
     <div
@@ -41,9 +43,13 @@ import { ViewTransitions } from "astro:transitions";
           class="fixed left-1/2 top-0 z-10 hidden h-dvh w-full -translate-x-1/2 flex-col items-center justify-center gap-16 backdrop-blur backdrop-brightness-50 lg:static lg:flex lg:h-full lg:translate-x-0 lg:flex-row lg:justify-end lg:gap-8 lg:backdrop-filter-none"
         >
           <nav class="flex flex-col gap-2 self-center lg:flex-row">
-            <Button link="/pl/intro/intro/" name="Docs" class="w-48 lg:w-36" />
             <Button
-              link="./examples/aurora"
+              link=`/${lang}/intro/intro/`
+              name="Docs"
+              class="w-48 lg:w-36"
+            />
+            <Button
+              link=`/${lang}/examples/aurora`
               name="Examples"
               class="w-48 lg:w-36"
             />

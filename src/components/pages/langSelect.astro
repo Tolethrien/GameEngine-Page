@@ -1,15 +1,16 @@
 ---
 import { Image } from "astro:assets";
 import arrow from "../../assets/pages/arrow.png";
-import { getRelativeLocaleUrl } from "astro:i18n";
+import { getCurrentPath } from "../../utils/staticPath";
 interface Props {
   class?: string;
 }
 const { class: added } = Astro.props;
-const path = Astro.url.pathname.slice(4);
+const { path } = getCurrentPath(Astro.url);
+
 const langs = {
-  EN: getRelativeLocaleUrl("en") + path,
-  PL: getRelativeLocaleUrl("pl") + path,
+  EN: "/en/" + path,
+  PL: "/pl/" + path,
 };
 ---
 
@@ -24,7 +25,7 @@ const langs = {
   >
     {
       Object.entries(langs).map(([key, value]) => (
-        <option value={value} selected={Astro.url.pathname.includes("/pl/")}>
+        <option value={value} selected={Astro.url.pathname.startsWith("/pl")}>
           {key}
         </option>
       ))

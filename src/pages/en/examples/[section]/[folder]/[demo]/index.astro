@@ -1,24 +1,38 @@
 ---
 import { getEntry } from "astro:content";
+import {
+  getCurrentPath,
+  getDemoPaths,
+} from "../../../../../../utils/staticPath";
 import { assert } from "../../../../../../utils/assert";
-import { getDemoPaths } from "../../../../../../utils/staticPath";
+import Browser from "../../../../../../components/pages/browser.astro";
+import BaseLayout from "../../../../../../layouts/baseLayout.astro";
 
 export async function getStaticPaths() {
   return await getDemoPaths();
 }
 let isTranslated = true;
-const { demo } = Astro.params;
-const path = Astro.url.pathname.split("examples");
-const url = path[0].split("/")[1] + path[1];
+const { lang, path } = getCurrentPath(Astro.url, ["examples"]);
+const url = `${lang}/${path}`;
+console.log("pl/" + path);
 let entry = await getEntry("demos", url);
 if (!entry) {
   isTranslated = false;
-  entry = await getEntry("demos", "pl" + path[1]);
+  entry = await getEntry("demos", "pl/" + path);
 }
 assert(entry);
 const { Content } = await entry.render();
 ---
 
-{!isTranslated && <p>fallback to polish</p>}
-<h1>this is {demo}, a decent car</h1>
-<Content />
+<BaseLayout>
+  <section
+    class="my-8 flex w-5/6 flex-grow items-center justify-center self-center justify-self-center"
+  >
+    <Browser class="lg:w-full lg:max-w-full">
+      <div>
+        {!isTranslated && <p>fallback to PL</p>}
+        <Content />
+      </div>
+    </Browser>
+  </section>
+</BaseLayout>

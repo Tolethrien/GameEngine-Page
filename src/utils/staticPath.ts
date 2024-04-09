@@ -1,5 +1,18 @@
 import { getCollection } from "astro:content";
 
+export const getCurrentPath = (url: URL, remove?: string[]) => {
+  let rawPath = url.pathname.split("/");
+  let path = rawPath.slice().splice(2);
+  if (remove) {
+    path = path.filter((element) => !remove.includes(element));
+  }
+  return {
+    path: path.join("/"),
+    lang: rawPath[1],
+    array: rawPath,
+    raw: url.pathname,
+  };
+};
 export const getSectionNames = async () => {
   const sections = new Set();
   const collecion = await getCollecion();

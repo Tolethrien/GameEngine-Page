@@ -1,0 +1,16 @@
+---
+import { Image } from "astro:assets";
+import folder from "../../assets/pages/folder.png";
+interface Props {
+  fileName: string;
+  path: string;
+}
+const { fileName, path } = Astro.props;
+---
+
+<div class="grid items-center justify-center gap-2">
+  <a href={path} class="no-underline">
+    <Image src={folder} alt="folder" class="h-12 w-16 justify-self-center" />
+    <p class="text-lg text-slate-200">{fileName}</p>
+  </a>
+</div>

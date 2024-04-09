@@ -1,10 +1,12 @@
 ---
 import logo from "../../assets/logos/logo-dark.png";
 import { Image } from "astro:assets";
+import { getCurrentPath } from "../../utils/staticPath";
+const { lang } = getCurrentPath(Astro.url);
 ---
 
 <a
-  href="/"
+  href={`/${lang}`}
   id="logo"
   class="z-10 m-0 flex pl-4 text-xl text-slate-100 no-underline md:gap-4 md:text-2xl lg:gap-0"
 >

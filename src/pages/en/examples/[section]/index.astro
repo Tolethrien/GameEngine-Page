@@ -1,7 +1,9 @@
 ---
 import { getCollection } from "astro:content";
-import { getSectionPaths } from "../../../../utils/staticPath";
-
+import { getCurrentPath, getSectionPaths } from "../../../../utils/staticPath";
+import BaseLayout from "../../../../layouts/baseLayout.astro";
+import Browser from "../../../../components/pages/browser.astro";
+import Folder from "../../../../components/pages/folder.astro";
 export async function getStaticPaths() {
   return await getSectionPaths();
 }
@@ -9,16 +11,24 @@ const { section } = Astro.params;
 const folders = await getCollection("demos", ({ slug }) =>
   slug.includes(section as string)
 );
-const folderNames = new Set();
+const folderNames = new Set<string>();
 folders.forEach(({ slug }) => folderNames.add(slug.split("/")[2]));
-const path = Astro.url.pathname.split("/").at(-1);
+const { array } = getCurrentPath(Astro.url);
+const path = array.at(-1);
 ---
 
-<h1>Folders</h1>
-{
-  Array.from(folderNames).map((folder) => (
-    <a href={`./${path}/${folder}`}>
-      {folder} <br />
-    </a>
-  ))
-}
+<BaseLayout>
+  <section
+    class="my-8 flex w-5/6 flex-grow items-center justify-center self-center justify-self-center"
+  >
+    <Browser class="lg:w-full lg:max-w-full">
+      <div>
+        {
+          Array.from(folderNames).map((folder) => (
+            <Folder path={`./${path}/${folder}`} folderName={folder} />
+          ))
+        }
+      </div>
+    </Browser>
+  </section>
+</BaseLayout>

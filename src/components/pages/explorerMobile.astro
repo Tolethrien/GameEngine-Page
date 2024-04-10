@@ -1,0 +1,31 @@
+---
+import { getCurrentPath } from "../../utils/staticPath";
+import { Image } from "astro:assets";
+import arrow from "../../assets/pages/arrow.png";
+const { pathArray } = getCurrentPath(Astro.url);
+
+const browsePath = pathArray.slice(1).join("/");
+---
+
+<div class="w-full md:hidden">
+  <div class="flex items-center justify-center gap-4 pb-4 pt-8">
+    <h1 class="text-center text-2xl text-slate-200">Aurora</h1>
+    <Image src={arrow} alt="go back" class="h-6 w-6" />
+  </div>
+  <div
+    class="flex items-center justify-center bg-[#734316] bg-opacity-20 p-2 text-sm text-slate-200 shadow-xl"
+  >
+    <div
+      class="m-auto w-11/12 rounded-lg bg-[#39363E] p-2 text-slate-200 lg:w-1/2"
+    >
+      <p class="overflow-hidden text-ellipsis whitespace-nowrap px-2">
+        {"/" + browsePath}
+      </p>
+    </div>
+  </div>
+  <div
+    class=`${pathArray.length < 4 && "grid"} h-[55dvh] auto-rows-min grid-cols-3 gap-2 overflow-y-auto rounded-bl-xl border-2 border-r-0 border-t-0 border-[#734316] border-opacity-40 bg-pattern py-6 backdrop-blur-sm`
+  >
+    <slot />
+  </div>
+</div>

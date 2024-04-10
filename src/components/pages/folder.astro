@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import folder from "../../assets/pages/folder.png";
+import { nameToUpper } from "../../utils/nameToUpper";
 interface Props {
   folderName: string;
   path: string;
@@ -9,10 +10,10 @@ const { folderName, path } = Astro.props;
 ---
 
 <a href={path} class="grid text-center no-underline">
-  <Image src={folder} alt="folder" class="h-12 w-12 justify-self-center" />
+  <Image src={folder} alt="folder" class="h-12 w-16 justify-self-center" />
   <p
-    class="overflow-hidden text-ellipsis whitespace-nowrap px-2 text-lg text-slate-200"
+    class="overflow-hidden text-ellipsis whitespace-nowrap px-2 text-sm text-slate-200 md:text-lg"
   >
-    {folderName}
+    {nameToUpper(folderName)}
   </p>
 </a>

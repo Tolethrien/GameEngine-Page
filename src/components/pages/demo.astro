@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import file from "../../assets/pages/file.png";
+import { nameToUpper } from "../../utils/nameToUpper";
 interface Props {
   fileName: string;
   path: string;
@@ -11,8 +12,8 @@ const { fileName, path } = Astro.props;
 <a href={path} class="grid text-center no-underline">
   <Image src={file} alt="folder" class="h-12 w-12 justify-self-center" />
   <p
-    class="overflow-hidden text-ellipsis whitespace-nowrap px-2 text-lg text-slate-200"
+    class="overflow-hidden text-ellipsis whitespace-nowrap px-2 text-sm text-slate-200 md:text-lg"
   >
-    {fileName}
+    {nameToUpper(fileName)}
   </p>
 </a>

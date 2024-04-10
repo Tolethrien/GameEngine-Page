@@ -9,7 +9,7 @@ import Progress from "../components/pages/progress.astro";
 import "../styles/pagesStyle.css";
 import { ViewTransitions } from "astro:transitions";
 import { getCurrentPath } from "../utils/staticPath";
-const { lang } = getCurrentPath(Astro.url);
+const { lang, path } = getCurrentPath(Astro.url);
 ---
 
 <html lang="en">
@@ -21,7 +21,7 @@ const { lang } = getCurrentPath(Astro.url);
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <!-- <ViewTransitions /> -->
+    <ViewTransitions />
   </head>
   <body class="overflow-x-hidden bg-[#151827]">
     <div
@@ -29,7 +29,7 @@ const { lang } = getCurrentPath(Astro.url);
     >
       <header class="relative flex justify-between">
         <div
-          class="absolute left-0 top-0 hidden h-4/5 w-full bg-nav-back bg-center bg-no-repeat opacity-30 lg:inline-block"
+          class="absolute left-0 top-0 hidden h-4/5 w-full bg-nav-back bg-cover bg-center bg-no-repeat opacity-30 lg:inline-block"
         >
         </div>
         <Logo />
@@ -51,7 +51,7 @@ const { lang } = getCurrentPath(Astro.url);
             <Button
               link=`/${lang}/examples/aurora`
               name="Examples"
-              class="w-48 lg:w-36"
+              class=`w-48 lg:w-36 ${path.includes("examples") && "hue-rotate-30"}`
             />
             <Button link="" name="Us" class="w-48 lg:w-36" />
           </nav>

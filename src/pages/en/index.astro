@@ -1,5 +1,5 @@
 ---
-import Browser from "../../components/pages/browser.astro";
+import Browser from "../../components/pages/explorerDesktop.astro";
 import Button from "../../components/pages/button.astro";
 import News from "../../components/pages/news.astro";
 import Progress from "../../components/pages/progress.astro";
@@ -31,7 +31,7 @@ import BaseLayout from "../../layouts/baseLayout.astro";
       />
     </section>
     <section class="flex items-center md:justify-center lg:items-end">
-      <Browser class="hidden md:block">
+      <!-- <Browser class="hidden md:block">
         {
           ["Aurora", "NaviGPU", "Dogma", "Engine", "Dupa", "Sik"].map(
             (name) => <button slot="Buttons">{name}</button>
@@ -51,7 +51,7 @@ import BaseLayout from "../../layouts/baseLayout.astro";
             In atcher to handle all you needs like lights and post-processing
           </p>
         </div>
-      </Browser>
+      </Browser> -->
       <!-- <div class="grid gap-16 text-slate-200 md:hidden">
         {
           features.map((feature) => (
@@ -64,7 +64,7 @@ import BaseLayout from "../../layouts/baseLayout.astro";
           ))
         }
       </div> -->
-      <div class="flex w-screen flex-col md:hidden">
+      <!-- <div class="flex w-screen flex-col md:hidden">
         <div
           class="flex w-full gap-0 overflow-y-auto *:w-28 *:flex-shrink-0 *:bg-transparent *:bg-label *:bg-contain *:bg-center *:bg-no-repeat *:p-3 *:px-4 *:font-pixel *:text-xs *:text-slate-200"
         >
@@ -91,7 +91,7 @@ import BaseLayout from "../../layouts/baseLayout.astro";
             In atcher to handle all you needs like lights and post-processing
           </p>
         </div>
-      </div>
+      </div> -->
     </section>
     <News />
     <Progress />

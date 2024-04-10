@@ -9,7 +9,7 @@ export const getCurrentPath = (url: URL, remove?: string[]) => {
   return {
     path: path.join("/"),
     lang: rawPath[0],
-    array: rawPath.splice(1),
+    pathArray: rawPath.splice(1),
     raw: url.pathname,
   };
 };

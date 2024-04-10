@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import arrow from "../../assets/pages/arrow.png";
+import { getCurrentPath, getSectionNames } from "../../utils/staticPath";
+import { nameToUpper } from "../../utils/nameToUpper";
+
+const sections = await getSectionNames();
+const { lang, path, pathArray } = getCurrentPath(Astro.url);
+const goBack = () => {
+  if (pathArray.length <= 2) return `/${lang}/${pathArray.join("/")}`;
+  return `/${lang}/${pathArray.slice(0, -1).join("/")}`;
+};
+---
+
+<div class="hidden w-11/12 flex-col md:flex lg:w-4/5">
+  <div class="flex w-full gap-2 overflow-x-auto overflow-y-hidden pl-2">
+    {
+      Array.from(sections).map((name) => (
+        <a
+          href={`/${lang}/examples/${name}`}
+          class={`w-28 flex-shrink-0 bg-label bg-contain bg-center bg-no-repeat p-4 px-2 text-center font-pixel text-xs text-slate-200 no-underline ${path.includes(name) ? "scale-110 hue-rotate-30" : "brightness-75"}`}
+        >
+          {nameToUpper(name)}
+        </a>
+      ))
+    }
+  </div>
+  <!-- //glowny -->
+  <div
+    class="flex-grow rounded-bl-xl border-2 border-[#734316] bg-[#39363E] bg-pattern"
+  >
+    <div
+      class="flex items-center gap-6 border-b-2 border-[#39363E] bg-[#39363E] bg-none p-4 pl-8 text-sm text-slate-200 shadow-xl md:bg-transparent"
+    >
+      <a href={goBack()} class="hidden items-center md:flex">
+        <Image
+          src={arrow}
+          alt="go back"
+          class={`rotate-180 w-8 h-8 ${pathArray.length === 2 && "brightness-50"}`}
+        />
+      </a>
+      <div class="w-3/4 rounded-lg bg-slate-800 p-2 lg:w-1/2">
+        <p class="overflow-hidden text-ellipsis whitespace-nowrap pl-4">
+          {path}
+        </p>
+      </div>
+    </div>
+    <div
+      class=`${pathArray.length < 4 && "grid"} h-[calc(60dvh-3rem)] auto-rows-min grid-cols-5 gap-4 overflow-y-auto py-6`
+    >
+      <slot />
+    </div>
+  </div>
+</div>

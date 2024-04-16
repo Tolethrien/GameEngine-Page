@@ -1,16 +1,42 @@
 ---
-import { getCurrentPath } from "../../utils/staticPath";
+import { getCurrentPath, getSectionNames } from "../../utils/staticPath";
 import { Image } from "astro:assets";
 import arrow from "../../assets/pages/arrow.png";
-const { pathArray } = getCurrentPath(Astro.url);
+import { nameToUpper } from "../../utils/nameToUpper";
+const { pathArray, lang } = getCurrentPath(Astro.url);
+const sections = await getSectionNames();
 
 const browsePath = pathArray.slice(1).join("/");
 ---
 
 <div class="w-full md:hidden">
   <div class="flex items-center justify-center gap-4 pb-4 pt-8">
-    <h1 class="text-center text-2xl text-slate-200">Aurora</h1>
-    <Image src={arrow} alt="go back" class="h-6 w-6" />
+    <label
+      for="sectionPicker"
+      class="relative flex items-center text-slate-200"
+    >
+      <select
+        id="sectionPicker"
+        class="w-full cursor-pointer appearance-none text-ellipsis bg-transparent p-1 pr-8 text-center font-pixel text-2xl text-inherit"
+      >
+        {
+          Array.from(sections).map((value) => (
+            <option
+              value={`/${lang}/examples/${value}`}
+              class="cursor-pointer bg-[#262c49] text-sm"
+              selected={pathArray.includes(value)}
+            >
+              {nameToUpper(value)}
+            </option>
+          ))
+        }
+      </select>
+      <Image
+        src={arrow}
+        alt="go back"
+        class="pointer-events-none absolute right-0 h-7 w-7 rotate-90 self-center"
+      />
+    </label>
   </div>
   <div
     class="flex items-center justify-center bg-[#734316] bg-opacity-20 p-2 text-sm text-slate-200 shadow-xl"
@@ -29,3 +55,10 @@ const browsePath = pathArray.slice(1).join("/");
     <slot />
   </div>
 </div>
+<script>
+  import { navigate } from "astro:transitions/client";
+  const select = document.getElementById("sectionPicker");
+  if (select) {
+    select.onchange = (ev) => navigate((ev.target as HTMLSelectElement).value);
+  }
+</script>

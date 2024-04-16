@@ -18,7 +18,6 @@ const langs = {
   for="languagePicker"
   class={`absolute lg:relative mr-4 flex items-center gap-1 text-slate-200 lg:top-auto lg:right-auto lg:left-auto lg:bottom-auto ${added}`}
 >
-  <span class="selectDefault"></span>
   <select
     id="languagePicker"
     class="b-0 w-14 cursor-pointer appearance-none text-ellipsis bg-transparent p-1 font-pixel text-sm text-inherit *:bg-[#262c49]"
@@ -41,7 +40,7 @@ const langs = {
 
 <script>
   import { navigate } from "astro:transitions/client";
-  const select = document.querySelector("select");
+  const select = document.getElementById("languagePicker");
   if (select)
     select.onchange = (ev) => navigate((ev.target as HTMLSelectElement).value);
 </script>

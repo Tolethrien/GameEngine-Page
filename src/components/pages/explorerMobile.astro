@@ -3,13 +3,16 @@ import { getCurrentPath, getSectionNames } from "../../utils/staticPath";
 import { Image } from "astro:assets";
 import arrow from "../../assets/pages/arrow.png";
 import { nameToUpper } from "../../utils/nameToUpper";
-const { pathArray, lang } = getCurrentPath(Astro.url);
+const { pathArray, lang, path } = getCurrentPath(Astro.url);
 const sections = await getSectionNames();
-
 const browsePath = pathArray.slice(1).join("/");
+Array.from(sections).forEach((value) => {
+  console.log(value, path, path.includes(value), pathArray, browsePath);
+});
+//TODO: bug gdzie cofanie nie odswieza strony wiec select wariuje
 ---
 
-<div class="w-full md:hidden">
+<div class="z-10 w-full md:hidden">
   <div class="flex items-center justify-center gap-4 pb-4 pt-8">
     <label
       for="sectionPicker"
@@ -20,13 +23,13 @@ const browsePath = pathArray.slice(1).join("/");
         class="w-full cursor-pointer appearance-none text-ellipsis bg-transparent p-1 pr-8 text-center font-pixel text-2xl text-inherit"
       >
         {
-          Array.from(sections).map((value) => (
+          Array.from(sections).map((section) => (
             <option
-              value={`/${lang}/examples/${value}`}
+              value={`/${lang}/examples/${section}`}
               class="cursor-pointer bg-[#262c49] text-sm"
-              selected={pathArray.includes(value)}
+              selected={path.includes(section)}
             >
-              {nameToUpper(value)}
+              {nameToUpper(section)}
             </option>
           ))
         }

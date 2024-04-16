@@ -9,6 +9,10 @@ import Progress from "../components/pages/progress.astro";
 import "../styles/pagesStyle.css";
 import { ViewTransitions } from "astro:transitions";
 import { getCurrentPath } from "../utils/staticPath";
+import linked from "../assets/pages/linked.svg";
+import astro from "../assets/pages/astro.svg";
+import Firefly from "../components/pages/firefly.astro";
+
 const { lang, path } = getCurrentPath(Astro.url);
 ---
 
@@ -24,8 +28,9 @@ const { lang, path } = getCurrentPath(Astro.url);
     <!-- <ViewTransitions /> -->
   </head>
   <body class="overflow-x-hidden bg-[#151827]">
+    <Firefly />
     <div
-      class="m-auto flex min-h-screen max-w-screen-2xl flex-col bg-background bg-cover bg-fixed bg-bottom bg-no-repeat"
+      class="-z-10 m-auto flex min-h-screen max-w-screen-2xl flex-col bg-background bg-cover bg-fixed bg-bottom bg-no-repeat"
     >
       <header class="relative flex justify-between">
         <div
@@ -66,8 +71,17 @@ const { lang, path } = getCurrentPath(Astro.url);
         </div>
       </header>
       <slot id="slot" />
-      <footer class="min-h-8 bg-black text-slate-200">
-        <p class="text-right">milfinity</p>
+      <footer
+        class="z-10 flex flex-col items-center gap-2 bg-black py-1 text-sm text-slate-200 sm:flex-row sm:items-end sm:justify-end sm:text-xs"
+      >
+        <div class="text-center sm:text-right">
+          <p class="sm:pr-10">contact:</p>
+          <Image src={linked} alt="linkedIn link" class="sm:h-4 sm:w-20" />
+        </div>
+        <div class="text-center sm:text-right">
+          <p class="sm:pr-5">Page&Docs:</p>
+          <Image src={astro} alt="linkedIn link" class="sm:h-4 sm:w-16" />
+        </div>
       </footer>
     </div>
     <script>

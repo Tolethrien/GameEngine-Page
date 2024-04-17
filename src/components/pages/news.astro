@@ -1,6 +1,8 @@
 ---
 import { Image } from "astro:assets";
 import arrow from "../../assets/pages/arrow.png";
+import pageControl from "../../content/pageControl";
+import { getCurrentPath } from "../../utils/staticPath";
 interface Props {
   mobile?: boolean;
 }
@@ -8,12 +10,24 @@ const { mobile = false } = Astro.props;
 const isVisible = mobile
   ? "block md:hidden"
   : "hidden md:block absolute right-6 top-6";
+const { lang } = getCurrentPath(Astro.url);
 ---
 
-<div class={`text-base md:text-xs text-slate-100 ${isVisible}`}>
-  <p>New Docs!</p>
-  <div class="mt-2 flex items-center justify-center gap-2 lg:justify-normal">
-    <p class="">Aurora renderer</p>
-    <Image src={arrow} alt="post background" class={"w-8 h-8 md:w-4 md:h-4"} />
-  </div>
-</div>
+{
+  pageControl.newPost.show && (
+    <div class={`text-base text-slate-100 md:text-xs ${isVisible}`}>
+      <p>{lang === "pl" ? "Nowy wpis!" : "New Docs!"}</p>
+      <a
+        href={`/${lang}/${pageControl.newPost.slug}`}
+        class="mt-2 flex items-center justify-center gap-2 text-inherit no-underline lg:justify-normal"
+      >
+        <p class="">{pageControl.newPost.showName}</p>
+        <Image
+          src={arrow}
+          alt="post background"
+          class={"h-8 w-8 md:h-4 md:w-4"}
+        />
+      </a>
+    </div>
+  )
+}

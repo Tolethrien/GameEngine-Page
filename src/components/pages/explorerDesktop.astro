@@ -27,7 +27,7 @@ const goBack = () => {
   </div>
   <!-- //glowny -->
   <div
-    class="flex-grow rounded-bl-xl border-2 border-[#734316] bg-[#39363E] bg-pattern"
+    class="flex-grow rounded-bl-xl border-2 border-[#734316] bg-[#39363ecc] bg-pattern"
   >
     <div
       class="flex items-center gap-6 border-b-2 border-[#39363E] bg-[#39363E] bg-none p-4 pl-8 text-sm text-slate-200 shadow-xl md:bg-transparent"
@@ -47,6 +47,7 @@ const goBack = () => {
     </div>
     <div
       class=`${pathArray.length < 4 && "grid"} h-[calc(60dvh-3rem)] auto-rows-min grid-cols-5 gap-4 overflow-y-auto py-6`
+      transition:animate="slide"
     >
       <slot />
     </div>

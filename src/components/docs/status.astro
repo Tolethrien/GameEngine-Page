@@ -16,8 +16,8 @@ interface Props {
 const { name, percent, status } = Astro.props;
 ---
 
-<div class="not-content col flex items-center gap-4">
+<div class="not-content flex items-center gap-4">
   <p><b>{name}:</b></p>
-  <Progress percent={percent} />
+  <Progress percent={percent} trackClass="w-16 md:w-40" />
+  <p><b>status</b>: {status}</p>
 </div>
-<p><b>status</b>: {status}</p>

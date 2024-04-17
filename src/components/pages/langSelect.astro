@@ -40,7 +40,10 @@ const langs = {
 
 <script>
   import { navigate } from "astro:transitions/client";
-  const select = document.getElementById("languagePicker");
-  if (select)
-    select.onchange = (ev) => navigate((ev.target as HTMLSelectElement).value);
+  document.addEventListener("astro:page-load", () => {
+    const select = document.getElementById("languagePicker");
+    if (select)
+      select.onchange = (ev) =>
+        navigate((ev.target as HTMLSelectElement).value);
+  });
 </script>

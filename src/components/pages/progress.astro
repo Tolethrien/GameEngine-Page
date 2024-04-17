@@ -1,20 +1,31 @@
 ---
 import ProgressBar from "./progressBar.astro";
+import pageControl from "../../content/pageControl";
 
 interface Props {
   mobile?: boolean;
+  lang: string;
 }
-const { mobile = false } = Astro.props;
+const entries = Object.entries(pageControl.progress);
+const percenttotal =
+  entries.reduce((acc, value) => (acc += value[1].percent), 0) / entries.length;
+const { mobile = false, lang } = Astro.props;
 const isVisible = mobile
   ? "absolute bottom-20 left-1/2 -translate-x-1/2 w-fit md:hidden text-slate-200"
   : "hidden md:block absolute left-6 bottom-6";
 ---
 
 <div class={isVisible}>
-  <p class="text-nowrap pb-2">Progess to V:0.01A</p>
+  <p class="text-nowrap pb-2">
+    {
+      lang === "pl"
+        ? "Postep do " + pageControl.currentVersion
+        : "Progess to " + pageControl.currentVersion
+    }
+  </p>
   <ProgressBar
-    percent={60}
-    trackClass={mobile ? "bg-slate-600" : "bg-transparent"}
+    percent={Math.floor(percenttotal)}
+    trackClass="bg-slate-600"
     thumbClass="text-slate-200"
   />
 </div>

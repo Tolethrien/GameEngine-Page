@@ -17,7 +17,7 @@ href="https://github.com/Tolethrien/GameEngine-core/blob/dev/src/core/aurora/aur
 - Initialize tworzy instancję Aurory łącząc się z podanym jej Canvasem.
 
 ```ts title="AuroraCore.ts"
-export default class AuroraTexture {
+export default class AuroraCore {
   //...
   static async initialize(canvas: HTMLCanvasElement, options?: CoreOptions);
   //...
@@ -41,7 +41,7 @@ export default class AuroraTexture {
 - resizeCanvas zmienia wielkość canvasu do któego została podpięta Aurora.
 
 ```ts title="AuroraCore.ts"
-export default class AuroraTexture {
+export default class AuroraCore {
   //...
   static resizeCanvas(size: Size2D);
   //...

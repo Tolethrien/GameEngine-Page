@@ -11,44 +11,45 @@ import BaseLayout from "../../layouts/baseLayout.astro";
     class="relative grid flex-grow grid-cols-1 gap-32 py-16 text-emerald-100 md:px-14 lg:grid-cols-2 lg:gap-16 xl:leading-snug"
   >
     <section class="px-6 sm:px-12 md:m-8 md:px-16 lg:m-0">
-      <h1 class="text-center text-emerald-200">Easy to use game Engine</h1>
+      <h1 class="text-center text-emerald-200">
+        Prosty w obsłudze silnik gier!
+      </h1>
       <p class="pt-8">
-        Misa is a small and easy to use 2D game engine designed for quick and
-        simple game development.
+        Misa to mały oraz prosty w użyciu silnik do szybkiego tworzenia prostych
+        gier 2D
       </p>
       <ul class="pt-8 *:ml-4 *:pt-2">
-        <li>Based on Typescript</li>
-        <li>Build for Desktop and HTML5</li>
-        <li>Great for small and simple games</li>
+        <li>Bazowany na Typescript</li>
+        <li>Zbudowany dla aplikacji Desktopowych oraz HTML5</li>
+        <li>Idealny do małych i prostych gier</li>
       </ul>
-      <p class="pt-6">Easy and simple doesn’t mean incapable</p>
-      <p class="pt-2">You can read more in our docs</p>
+      <p class="pt-6">Mały i prosty nie znaczy jednak że wybrakowany!</p>
+      <p class="pt-2">Możesz dowiedzieć sie wiecej w naszej dokumentacji</p>
       <Button
-        link=""
-        name="Read here!"
+        link="./pl/intro/intro"
+        name="Wiecej!"
         class="ml-auto mt-4 block w-40 pr-8 text-sm lg:w-48"
         arrow
       />
     </section>
     <section class="flex flex-col items-center px-12 pb-8 lg:justify-end">
-      <h1 class="text-center text-emerald-200">Full library of examples</h1>
+      <h1 class="text-center text-emerald-200">Pełna lista przykładów!</h1>
       <p class="pt-8">
-        WebGPU based. if your browser doesnt support webgpu examples will be
-        displayed as gifs
+        Oparte na WebGPU. Jeśli twoja przegladarka nie wspiera tej technologii
+        zamiast interaktywnych przykładów wyświetlone zostana gify lub zdjęcia.
       </p>
 
       <p class="pt-6">
-        you can see what each part of a engine is cable of in our extended
-        examples section
+        Możesz zobaczyć co potrafi Misa w naszej sekcji przykładów tutaj:
       </p>
       <Button
-        link=""
-        name="Read here!"
+        link="./pl/examples/aurora"
+        name="Wiecej!"
         class="mt-4 block w-40 pr-8 text-sm lg:w-48"
         arrow
       />
     </section>
     <News />
-    <Progress />
+    <Progress lang="pl" />
   </main>
 </BaseLayout>

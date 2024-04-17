@@ -15,7 +15,7 @@ import {
   TabItem,
 } from "@astrojs/starlight/components";
 import Status from "../../../../components/docs/status.astro";
-import stats from "../../../engineStats";
+import pageControl from "../../../pageControl";
 
 ## GameEngine
 
@@ -116,16 +116,15 @@ Development status:
   pokemony
 
 <br />
-Gotowość Modułów dla wersji: **{stats.currentVersion}**
+Gotowość Modułów dla wersji: **{pageControl.currentVersion}**
 
 <br />
-
-- <Status name="Editor" percent={10} status="Preplaning" />
-- <Status name="Core" percent={75} status="In progress" />
-- <Status name="Aurora" percent={80} status="In progress" />
-- <Status name="Dogma" percent={90} status="In progress" />
-- <Status name="MapCreator" percent={0} status="Preplaning" />
-- <Status name="FontParser" percent={25} status="On hold" />
-- <Status name="NaviGPU" percent={40} status="In progress" />
+{Object.entries(pageControl.progress).map((progress) => (
+  <Status
+    name={progress[0]}
+    percent={progress[1].percent}
+    status={progress[1].status}
+  />
+))}
 
 stan na: **26.04.24**

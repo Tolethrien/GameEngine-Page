@@ -14,18 +14,39 @@ import astro from "../assets/pages/astro.svg";
 import Firefly from "../components/pages/firefly.astro";
 
 const { lang, path } = getCurrentPath(Astro.url);
+/**
+ * zrobic demo page
+ * pokombinowac z viewTrans
+ * naprawic bug w mobile
+ * co z guzikiem US?
+ * zrobic dodatkowa funkcje tlumaczaca foldery i pliki na pl
+ * napisac polska i angielska wersje strony
+ * przeleciec kod i poczyścić
+ * zobacz czy da sie uzyc ./
+ *
+ *
+ */
 ---
 
-<html lang="en">
+<html lang={lang}>
   <head>
+    <title>Misa - Game Engine</title>
+    <meta name="title" content="Misa - Game Engine" />
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta title="page" />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
-    <!-- <ViewTransitions /> -->
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="game engine for dummies." />
+    <meta
+      name="keywords"
+      content="game, game engine, make game, js game, ts game"
+    />
+    <meta name="author" content="Milfinity" />
+    <link rel="icon" href="./icon.png" />
+    <ViewTransitions />
   </head>
   <body class="overflow-x-hidden bg-[#151827]">
     <Firefly />
@@ -40,12 +61,12 @@ const { lang, path } = getCurrentPath(Astro.url);
         <Logo />
         <button
           id="hamb"
-          class="z-20 mr-6 mt-4 h-12 w-12 bg-transparent bg-hamburger-open bg-contain bg-center bg-no-repeat lg:hidden"
+          class="z-30 mr-6 mt-4 h-12 w-12 bg-transparent bg-hamburger-open bg-contain bg-center bg-no-repeat lg:hidden"
         ></button>
 
         <div
           id="navi"
-          class="fixed left-1/2 top-0 z-10 hidden h-dvh w-full -translate-x-1/2 flex-col items-center justify-center gap-16 backdrop-blur backdrop-brightness-50 lg:static lg:flex lg:h-full lg:translate-x-0 lg:flex-row lg:justify-end lg:gap-8 lg:backdrop-filter-none"
+          class="fixed left-1/2 top-0 z-20 hidden h-dvh w-full -translate-x-1/2 flex-col items-center justify-center gap-16 backdrop-blur backdrop-brightness-50 lg:static lg:flex lg:h-full lg:translate-x-0 lg:flex-row lg:justify-end lg:gap-8 lg:backdrop-filter-none"
         >
           <nav class="flex flex-col gap-2 self-center lg:flex-row">
             <Button
@@ -66,7 +87,7 @@ const { lang, path } = getCurrentPath(Astro.url);
             class={"w-28 h-28 z-20 absolute lg:hidden left-1/2 top-4 -translate-x-1/2"}
           />
           <News mobile />
-          <Progress mobile />
+          <Progress mobile lang={lang} />
           <LangSelect class="left-6 top-6" />
         </div>
       </header>
@@ -75,8 +96,10 @@ const { lang, path } = getCurrentPath(Astro.url);
         class="z-10 flex flex-col items-center gap-2 bg-black py-1 text-sm text-slate-200 sm:flex-row sm:items-end sm:justify-end sm:text-xs"
       >
         <div class="text-center sm:text-right">
-          <p class="sm:pr-10">contact:</p>
-          <Image src={linked} alt="linkedIn link" class="sm:h-4 sm:w-20" />
+          <p class="sm:pr-10">{lang == "pl" ? "kontakt:" : "contact:"}</p>
+          <a href="https://www.linkedin.com/in/pawe%C5%82-grela-762165234/">
+            <Image src={linked} alt="linkedIn link" class="sm:h-4 sm:w-20" />
+          </a>
         </div>
         <div class="text-center sm:text-right">
           <p class="sm:pr-5">Page&Docs:</p>
@@ -85,21 +108,23 @@ const { lang, path } = getCurrentPath(Astro.url);
       </footer>
     </div>
     <script>
-      const button = document.getElementById("hamb");
-      const navi = document.getElementById("navi");
-      const logo = document.getElementById("logo");
-      const slot = document.getElementsByTagName("body")[0];
+      document.addEventListener("astro:page-load", () => {
+        const button = document.getElementById("hamb");
+        const navi = document.getElementById("navi");
+        const logo = document.getElementById("logo");
+        const slot = document.getElementsByTagName("body")[0];
 
-      button?.addEventListener("click", () => {
-        slot.classList.toggle("overflow-hidden");
-        logo?.classList.toggle("invisible");
-        if (navi?.classList.contains("hidden")) {
-          navi.classList.replace("hidden", "flex");
-          button.classList.replace("bg-hamburger-open", "bg-hamburger-close");
-        } else {
-          navi?.classList.replace("flex", "hidden");
-          button.classList.replace("bg-hamburger-close", "bg-hamburger-open");
-        }
+        button?.addEventListener("click", () => {
+          slot.classList.toggle("overflow-hidden");
+          logo?.classList.toggle("invisible");
+          if (navi?.classList.contains("hidden")) {
+            navi.classList.replace("hidden", "flex");
+            button.classList.replace("bg-hamburger-open", "bg-hamburger-close");
+          } else {
+            navi?.classList.replace("flex", "hidden");
+            button.classList.replace("bg-hamburger-close", "bg-hamburger-open");
+          }
+        });
       });
     </script>
   </body>

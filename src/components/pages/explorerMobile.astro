@@ -54,6 +54,7 @@ Array.from(sections).forEach((value) => {
   </div>
   <div
     class=`${pathArray.length < 4 && "grid"} h-[55dvh] auto-rows-min grid-cols-3 gap-2 overflow-y-auto rounded-bl-xl border-2 border-r-0 border-t-0 border-[#734316] border-opacity-40 bg-pattern py-6 backdrop-blur-sm`
+    transition:animate="slide"
   >
     <slot />
   </div>

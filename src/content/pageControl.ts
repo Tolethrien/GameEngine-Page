@@ -1,3 +1,5 @@
+import { object } from "astro/zod";
+
 type ProgressStatus =
   | "Preplaning"
   | "In progress"
@@ -20,7 +22,7 @@ export default {
     MapCreator: { percent: 0, status: "Preplaning" },
     NaviGPU: { percent: 40, status: "On hold" },
   },
-  newPost: { show: true, showName: "Aurora", slug: "" },
+  newPost: { show: true, showName: "Aurora", slug: "intro/intro" },
 } as StatsSchema;
 function verifyVersion(version: string) {
   const regex = /^V:\d+\.(0[1-9]|[1-9][0-9])[A-Z]$/;

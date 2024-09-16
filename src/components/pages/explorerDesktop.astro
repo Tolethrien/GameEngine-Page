@@ -25,7 +25,6 @@ const goBack = () => {
       ))
     }
   </div>
-  <!-- //glowny -->
   <div
     class="flex-grow rounded-bl-xl border-2 border-[#734316] bg-[#39363ecc] bg-pattern"
   >
@@ -46,7 +45,7 @@ const goBack = () => {
       </div>
     </div>
     <div
-      class=`${pathArray.length < 4 && "grid"} h-[calc(60dvh-3rem)] auto-rows-min grid-cols-5 gap-4 overflow-y-auto py-6`
+      class=`${pathArray.length < 4 ? "grid" : "flex justify-center"} h-[calc(60dvh-3rem)] auto-rows-min grid-cols-5 gap-4 overflow-y-auto py-6`
       transition:animate="slide"
     >
       <slot />

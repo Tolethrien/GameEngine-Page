@@ -12,6 +12,10 @@ export async function getStaticPaths() {
 const { folder } = Astro.params;
 const files = await getCollection(
   "demos",
+  ({ slug }) => slug.startsWith("en") && slug.includes(folder as string)
+);
+const translatedFiles = await getCollection(
+  "demos",
   ({ slug }) => slug.startsWith("pl") && slug.includes(folder as string)
 );
 ---
@@ -24,7 +28,12 @@ const files = await getCollection(
       {
         files.map(({ data, slug }) => {
           const url = slug.split("/").splice(2).join("/");
-          return <Demo path={`./${url}`} fileName={data.title} />;
+          const translatedTitle = translatedFiles.find(({ slug }) =>
+            slug.includes(url)
+          )?.data.title;
+          return (
+            <Demo path={`./${url}`} fileName={translatedTitle ?? data.title} />
+          );
         })
       }
     </ExplorerDesktop>
@@ -32,7 +41,12 @@ const files = await getCollection(
       {
         files.map(({ data, slug }) => {
           const url = slug.split("/").splice(2).join("/");
-          return <Demo path={`./${url}`} fileName={data.title} />;
+          const translatedTitle = translatedFiles.find(({ slug }) =>
+            slug.includes(url)
+          )?.data.title;
+          return (
+            <Demo path={`./${url}`} fileName={translatedTitle ?? data.title} />
+          );
         })
       }
     </ExplorerMobile>

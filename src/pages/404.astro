@@ -1,5 +1,20 @@
 ---
-
+import Button from "../components/pages/button.astro";
+import BaseLayout from "../layouts/baseLayout.astro";
 ---
 
-<h1>404</h1>
+<BaseLayout>
+  <section
+    class="flex flex-grow flex-col items-center justify-center gap-8 p-8"
+  >
+    <h1>404 - Page not found!</h1>
+    <p>Whoops! Something went wrong! :(</p>
+    <p>You can go back or return to main page</p>
+    <Button
+      link="../"
+      name="RUN!!"
+      class="mt-4 block w-40 pr-8 text-sm lg:w-48"
+      arrow
+    />
+  </section>
+</BaseLayout>

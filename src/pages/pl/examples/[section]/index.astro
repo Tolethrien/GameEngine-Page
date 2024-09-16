@@ -5,17 +5,27 @@ import BaseLayout from "../../../../layouts/baseLayout.astro";
 import ExplorerDesktop from "../../../../components/pages/explorerDesktop.astro";
 import ExplorerMobile from "../../../../components/pages/explorerMobile.astro";
 import Folder from "../../../../components/pages/folder.astro";
+import demosI18 from "../../../../content/i18n/demosI18.json";
 export async function getStaticPaths() {
   return await getSectionPaths();
 }
 const { section } = Astro.params;
-const folders = await getCollection("demos", ({ slug }) =>
-  slug.includes(section as string)
+const folders = await getCollection(
+  "demos",
+  ({ slug }) => slug.startsWith("en") && slug.includes(section as string)
 );
+
 const folderNames = new Set<string>();
 folders.forEach(({ slug }) => folderNames.add(slug.split("/")[2]));
 const { pathArray } = getCurrentPath(Astro.url);
 const path = pathArray.at(-1);
+const translateName = (name: string) => {
+  const folderName = Object.entries(demosI18.pl.folders).find(
+    ([key]) => name === key
+  );
+  if (folderName) return folderName[1];
+  return name;
+};
 ---
 
 <BaseLayout>
@@ -25,14 +35,20 @@ const path = pathArray.at(-1);
     <ExplorerDesktop>
       {
         Array.from(folderNames).map((folder) => (
-          <Folder path={`./${path}/${folder}`} folderName={folder} />
+          <Folder
+            path={`./${path}/${folder}`}
+            folderName={translateName(folder)}
+          />
         ))
       }
     </ExplorerDesktop>
     <ExplorerMobile>
       {
         Array.from(folderNames).map((folder) => (
-          <Folder path={`./${path}/${folder}`} folderName={folder} />
+          <Folder
+            path={`./${path}/${folder}`}
+            folderName={translateName(folder)}
+          />
         ))
       }
     </ExplorerMobile>

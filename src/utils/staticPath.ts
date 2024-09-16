@@ -5,7 +5,6 @@ export const getCurrentPath = (url: URL, remove?: string[]) => {
   if (remove) {
     path = path.filter((element) => !remove.includes(element));
   }
-
   return {
     path: path.join("/"),
     lang: rawPath[0],
@@ -34,6 +33,7 @@ export const getFolderPaths = async () => {
   const sectionsData = new Map<string, Set<string>>();
   const paths: { params: { section: string; folder: string } }[] = [];
   const collecion = await getCollecion();
+
   collecion.forEach(({ slug }) => {
     const path = slug.split("/").splice(1);
     if (!sectionsData.has(path[0])) sectionsData.set(path[0], new Set());
@@ -56,4 +56,4 @@ export const getDemoPaths = async () => {
   return paths;
 };
 const getCollecion = async () =>
-  await getCollection("demos", ({ slug }) => slug.startsWith("pl"));
+  await getCollection("demos", ({ slug }) => slug.startsWith("en"));

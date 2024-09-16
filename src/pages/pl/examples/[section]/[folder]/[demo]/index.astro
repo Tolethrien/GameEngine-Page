@@ -12,9 +12,15 @@ import ExplorerMobile from "../../../../../../components/pages/explorerMobile.as
 export async function getStaticPaths() {
   return await getDemoPaths();
 }
+let isTranslated = true;
+
 const { path, lang } = getCurrentPath(Astro.url, ["examples"]);
 const url = `${lang}/${path}`;
-const entry = await getEntry("demos", url);
+let entry = await getEntry("demos", url);
+if (!entry) {
+  isTranslated = false;
+  entry = await getEntry("demos", `en/${path}`);
+}
 assert(entry);
 const { Content } = await entry.render();
 ---

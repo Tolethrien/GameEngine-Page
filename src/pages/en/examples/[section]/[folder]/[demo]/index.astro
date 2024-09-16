@@ -12,15 +12,10 @@ import ExplorerMobile from "../../../../../../components/pages/explorerMobile.as
 export async function getStaticPaths() {
   return await getDemoPaths();
 }
-let isTranslated = true;
+
 const { lang, path } = getCurrentPath(Astro.url, ["examples"]);
 const url = `${lang}/${path}`;
-let entry = await getEntry("demos", url);
-if (!entry) {
-  isTranslated = false;
-
-  entry = await getEntry("demos", `pl/${path}`);
-}
+const entry = await getEntry("demos", url);
 assert(entry);
 const { Content } = await entry!.render();
 ---
@@ -30,8 +25,11 @@ const { Content } = await entry!.render();
     class="flex w-full flex-grow flex-col items-center self-center justify-self-center md:justify-center"
   >
     <ExplorerDesktop>
-      <div>
+      <div class="px-6 *:pb-4">
         <Content />
+        <iframe
+          src={`https://game-engine-web-examples.vercel.app/?demo=${entry.data.demo}`}
+          class="h-full w-full"></iframe>
       </div>
     </ExplorerDesktop>
     <ExplorerMobile>

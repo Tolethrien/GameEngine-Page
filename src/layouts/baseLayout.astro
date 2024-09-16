@@ -15,14 +15,7 @@ import Firefly from "../components/pages/firefly.astro";
 
 const { lang, path } = getCurrentPath(Astro.url);
 /**
- * zrobic demo page
- * naprawic bug w mobile
- * co z guzikiem US?
- * zrobic dodatkowa funkcje tlumaczaca foldery i pliki na pl
- * napisac polska i angielska wersje strony
  * przeleciec kod i poczyścić
- * zobacz czy da sie uzyc ./
- *
  *
  */
 ---
@@ -78,7 +71,7 @@ const { lang, path } = getCurrentPath(Astro.url);
               name="Examples"
               class=`w-48 lg:w-36 ${path.includes("examples") && "hue-rotate-30"}`
             />
-            <Button link="" name="Us" class="w-48 lg:w-36" />
+            <!-- <Button link="" name="Us" class="w-48 lg:w-36" /> -->
           </nav>
           <Image
             src={logoDead}

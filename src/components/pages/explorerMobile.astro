@@ -6,10 +6,6 @@ import { nameToUpper } from "../../utils/nameToUpper";
 const { pathArray, lang, path } = getCurrentPath(Astro.url);
 const sections = await getSectionNames();
 const browsePath = pathArray.slice(1).join("/");
-Array.from(sections).forEach((value) => {
-  console.log(value, path, path.includes(value), pathArray, browsePath);
-});
-//TODO: bug gdzie cofanie nie odswieza strony wiec select wariuje
 ---
 
 <div class="z-10 w-full md:hidden">
@@ -53,7 +49,7 @@ Array.from(sections).forEach((value) => {
     </div>
   </div>
   <div
-    class=`${pathArray.length < 4 && "grid"} h-[55dvh] auto-rows-min grid-cols-3 gap-2 overflow-y-auto rounded-bl-xl border-2 border-r-0 border-t-0 border-[#734316] border-opacity-40 bg-pattern py-6 backdrop-blur-sm`
+    class=`${pathArray.length < 4 ? "grid" : "flex justify-center"} h-[55dvh] auto-rows-min grid-cols-3 gap-2 overflow-y-auto rounded-bl-xl border-2 border-r-0 border-t-0 border-[#734316] border-opacity-40 bg-pattern py-6 backdrop-blur-sm`
     transition:animate="slide"
   >
     <slot />

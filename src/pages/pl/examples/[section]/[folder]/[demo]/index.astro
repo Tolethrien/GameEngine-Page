@@ -8,6 +8,7 @@ import BaseLayout from "../../../../../../layouts/baseLayout.astro";
 import { getEntry } from "astro:content";
 import ExplorerDesktop from "../../../../../../components/pages/explorerDesktop.astro";
 import ExplorerMobile from "../../../../../../components/pages/explorerMobile.astro";
+import DemoFrame from "../../../../../../components/pages/demoFrame.astro";
 
 export async function getStaticPaths() {
   return await getDemoPaths();
@@ -30,13 +31,17 @@ const { Content } = await entry.render();
     class="flex w-full flex-grow flex-col items-center self-center justify-self-center md:justify-center"
   >
     <ExplorerDesktop>
-      <div>
+      <div class="relative h-full w-full px-6 py-4 text-white">
         <Content />
+        <DemoFrame demoName={entry.data.demo} />
+        <br />
       </div>
     </ExplorerDesktop>
     <ExplorerMobile>
-      <div>
+      <div class="h-full w-full px-6 text-white">
         <Content />
+        <p>NOTE!: Interactive Demos are not avalible on mobile</p>
+        <br />
       </div>
     </ExplorerMobile>
   </section>

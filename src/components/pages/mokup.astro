@@ -1,0 +1,57 @@
+---
+interface Props {
+  lang: "pl" | "en";
+}
+const { lang } = Astro.props;
+---
+
+<dialog
+  class="absolute left-1 top-3 w-4/5 rounded-md border-2 border-emerald-200 bg-slate-900 bg-pattern p-4 text-xs text-emerald-200 backdrop:backdrop-brightness-50 sm:left-6 sm:w-1/2 lg:w-1/3"
+  id="mokupNote"
+>
+  <p>{lang === "pl" ? "Uwaga!" : "Note!"}</p>
+  <div class="*:py-1">
+    {
+      lang === "pl" ? (
+        <>
+          <p class="pt-2">
+            Ta strona jak i dokumentacja to tylko szkielet strony jak ma
+            wygladać w finalnej wersji!
+            <p>
+              Brak jej faktycznej treści oraz posiada niedopracowania które
+              załatane zostana dopiero kiedy pojawi sie faktyczna dokumentacja
+              oraz Przykłady.
+            </p>
+            <p>Jest to bardziej demo technologiczne niż gotowy projekt.</p>
+          </p>
+        </>
+      ) : (
+        <>
+          <p class="pt-2">
+            This page, as well as the documentation, is just a skeleton of what
+            the final version is supposed to look like!
+            <p>
+              It lacks actual content and contains imperfections that will only
+              be fixed once the actual documentation and examples are available.
+            </p>
+            <p>It is more of a technological demo than a finished project.</p>
+          </p>
+        </>
+      )
+    }
+    <form method="dialog" class="flex justify-center">
+      <button
+        class="mt-2 cursor-pointer border-2 border-white bg-transparent p-2 font-pixel text-[8px] text-white"
+        id="mokupButton">{lang === "pl" ? "Zrozumiano!" : "Understood!"}</button
+      >
+    </form>
+  </div>
+  <script>
+    const mokup = document.getElementById("mokupNote") as HTMLDialogElement;
+    const button = document.getElementById("mokupButton") as HTMLButtonElement;
+    button.addEventListener("click", () =>
+      window.localStorage.setItem("mokupNote", "clicked")
+    );
+    if (!window.localStorage.getItem("mokupNote")) mokup.showModal();
+  </script>
+</dialog>

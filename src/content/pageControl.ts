@@ -8,7 +8,7 @@ export default {
     MapCreator: { percent: 0, status: "Preplaning" },
     NaviGPU: { percent: 40, status: "On hold" },
   },
-  newPost: { show: true, showName: "Aurora", slug: "intro/intro" },
+  newPost: { show: true, showName: "First frame", slug: "guides/firstframe" },
 } as StatsSchema;
 function verifyVersion(version: string) {
   const regex = /^V:\d+\.(0[1-9]|[1-9][0-9])[A-Z]$/;

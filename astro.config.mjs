@@ -15,6 +15,9 @@ export default defineConfig({
     starlight({
       title: "Docs",
       social: {},
+      components: {
+        SiteTitle: "/src/components/docs/title.astro",
+      },
       logo: {
         dark: "./src/assets/logos/logo-dark.png",
         light: "./src/assets/logos/logo-light.png",
